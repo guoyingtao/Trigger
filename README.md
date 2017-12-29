@@ -1,5 +1,5 @@
 # Trigger
-Trigger is used to check if some conditions fulfilled like following:
+Trigger is used to easily check if some conditions are fulfilled like following:
 - The first time happen
 - The N time happen
 - repeat N time
