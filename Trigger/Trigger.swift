@@ -156,8 +156,8 @@ extension Trigger {
     
     save()
     
-    let t = getCurrentRepeatTime(task.id!)
-    print("\(task.id!)repeat time is \(t)")
+//    let t = getCurrentRepeatTime(task.id!)
+//    print("\(task.id!) repeat time is \(t)")
     
     return pullTrigger
   }

@@ -29,10 +29,25 @@ class ViewController: UITableViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    Trigger().firstRunCheck("Tip") {
+      let alertController = UIAlertController(title: "Tip", message: "Click [Clear All] Button to restart a new round test.", preferredStyle: .alert)
+      let okAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
+        print("You've pressed OK");
+      }
+      alertController.addAction(okAction)
+      self.present(alertController, animated: true, completion: nil)
+    }
   }
   
   @IBAction func clearAll(_ sender: Any) {
-    Trigger().clearAll()
+    // You can also use Trigger().clearAll(),
+    // but you will see the popup alert every time when starting
+    Trigger().clear(id: "Event1")
+    Trigger().clear(id: "Event2")
+    Trigger().clear(id: "Event3")
+    Trigger().clear(id: "Event4")
+    
     event1TriggedLabel.isHidden = true
     event2TriggedLabel.isHidden = true
     event3TriggedLabel.isHidden = true
