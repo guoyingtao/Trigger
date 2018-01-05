@@ -1,6 +1,6 @@
-![Trigger](https://github.com/guoyingtao/repo/blob/master/images/Trigger.png)
+![SwiftTrigger](https://github.com/guoyingtao/repo/blob/master/images/Trigger.png)
 
-# Trigger
+# SwiftTrigger
 
 Trigger is used to easily check if some events should be trigged by executing times:
 - The first time
@@ -23,7 +23,7 @@ Trigger is used to easily check if some events should be trigged by executing ti
 $ gem install cocoapods
 ```
 
-To integrate EchoTipCalc into your Xcode project using CocoaPods, specify it in your `Podfile`:
+To integrate SwiftTrigger into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
 pod 'SwiftTrigger'
