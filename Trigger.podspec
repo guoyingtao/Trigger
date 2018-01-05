@@ -9,7 +9,7 @@
 `echo "4.0" > .swift-version`
 
 Pod::Spec.new do |s|
-s.name         = "Trigger"
+  s.name         = "SwiftTrigger"
   s.version      = "0.1.0"
   s.summary      = "Trigger is used to easily check if some events should be trigged by executing times."
 
