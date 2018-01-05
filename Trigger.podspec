@@ -6,6 +6,8 @@
 #  To see working Podspecs in the CocoaPods repo see https://github.com/CocoaPods/Specs/
 #
 
+`echo "4.0" > .swift-version`
+
 Pod::Spec.new do |s|
 s.name         = "Trigger"
   s.version      = "0.1.0"
@@ -26,6 +28,7 @@ s.name         = "Trigger"
   s.platform     = :ios
   s.ios.deployment_target = '10.0'
   s.source       = { :git => "https://github.com/guoyingtao/Trigger.git", :tag => "#{s.version}" }
-  s.source_files  = "Trigger/Trigger.swift","Trigger/TriggerModel.xcdatamodeld"
+  s.source_files  = "Trigger/Trigger.swift"
+  s.resources = "Trigger/TriggerModel.xcdatamodeld"
 
 end
