@@ -2,7 +2,7 @@
 
 # SwiftTrigger
 
-Trigger is used to easily check if some events should be trigged by executing times:
+SwiftTrigger is used to easily check if some events should be trigged by executing times:
 - The first time
 - The N time
 - every N times
