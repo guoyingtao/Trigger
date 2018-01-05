@@ -2,12 +2,11 @@
 
 # Trigger
 
-Trigger is used to easily check if some conditions are fulfilled like following:
-- The first time happen
-- The N time happen
-- repeat N time
-- The N days later - TODO
-- repeat N days - TODO
+Trigger is used to easily check if some events should be trigged by executing times:
+- The first time
+- The N time
+- every N times
+- every N times but stop after repeating M times
 
 ## Requirements
 
@@ -37,7 +36,7 @@ Trigger().check("Event3", targetCount: N, repeatTime: 0) {
 }
 ```
 
-### create an event trigged every N times and repeat M times then stop
+### create an event trigged every N times but stop after repeating M times
 ```swift
 Trigger().check("Event4", targetCount: N, repeatTime: M) {
   // do something
