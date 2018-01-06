@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5F6081FD1FFD87620043F259"
-               BuildableName = "Trigger.framework"
-               BlueprintName = "Trigger"
-               ReferencedContainer = "container:Trigger.xcodeproj">
+               BuildableName = "SwiftTrigger.framework"
+               BlueprintName = "SwiftTrigger"
+               ReferencedContainer = "container:SwiftTrigger.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,9 +34,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5F6082061FFD87620043F259"
-               BuildableName = "TriggerTests.xctest"
-               BlueprintName = "TriggerTests"
-               ReferencedContainer = "container:Trigger.xcodeproj">
+               BuildableName = "SwiftTriggerTests.xctest"
+               BlueprintName = "SwiftTriggerTests"
+               ReferencedContainer = "container:SwiftTrigger.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -44,9 +44,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5F6081FD1FFD87620043F259"
-            BuildableName = "Trigger.framework"
-            BlueprintName = "Trigger"
-            ReferencedContainer = "container:Trigger.xcodeproj">
+            BuildableName = "SwiftTrigger.framework"
+            BlueprintName = "SwiftTrigger"
+            ReferencedContainer = "container:SwiftTrigger.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -67,9 +67,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5F6081FD1FFD87620043F259"
-            BuildableName = "Trigger.framework"
-            BlueprintName = "Trigger"
-            ReferencedContainer = "container:Trigger.xcodeproj">
+            BuildableName = "SwiftTrigger.framework"
+            BlueprintName = "SwiftTrigger"
+            ReferencedContainer = "container:SwiftTrigger.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -85,9 +85,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5F6081FD1FFD87620043F259"
-            BuildableName = "Trigger.framework"
-            BlueprintName = "Trigger"
-            ReferencedContainer = "container:Trigger.xcodeproj">
+            BuildableName = "SwiftTrigger.framework"
+            BlueprintName = "SwiftTrigger"
+            ReferencedContainer = "container:SwiftTrigger.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

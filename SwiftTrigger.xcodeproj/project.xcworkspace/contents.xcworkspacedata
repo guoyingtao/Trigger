@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Trigger.xcodeproj">
+      location = "self:/Users/echo/Projects/Swift/Trigger/SwiftTrigger.xcodeproj">
    </FileRef>
 </Workspace>

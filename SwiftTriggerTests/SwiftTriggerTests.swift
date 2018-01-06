@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Trigger
+@testable import SwiftTrigger
 
 class TriggerTests: XCTestCase {
     
