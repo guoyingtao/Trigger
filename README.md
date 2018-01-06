@@ -66,7 +66,7 @@ SwiftTrigger().clear("Event1")
 
 ### clear all events
 ```swift
-SwiftTrigger().clearAll
+SwiftTrigger().clearAll()
 ```
 
 
