@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class Trigger {
+public class Trigger {
   private lazy var persistentContainer: NSPersistentContainer = {
     let container = NSPersistentContainer(name: "TriggerModel")
     container.loadPersistentStores(completionHandler: { (storeDescription, error) in
