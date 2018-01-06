@@ -22,7 +22,7 @@ public class Trigger {
   
   private var managedObjectContext: NSManagedObjectContext!
   
-  init() {
+  public init() {
     managedObjectContext = persistentContainer.viewContext
   }
 }
