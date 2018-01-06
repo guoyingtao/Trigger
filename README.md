@@ -1,8 +1,8 @@
-![Trigger](https://github.com/guoyingtao/repo/blob/master/images/Trigger.png)
+![SwiftTrigger](https://github.com/guoyingtao/repo/blob/master/images/Trigger.png)
 
-# Trigger
+# SwiftTrigger
 
-Trigger is used to easily check if some events should be trigged by executing times:
+SwiftTrigger is used to easily check if some events should be trigged by executing times:
 - The first time
 - The N time
 - every N times
@@ -12,6 +12,22 @@ Trigger is used to easily check if some events should be trigged by executing ti
 
 * iOS 10.0+
 * Xcode 9.0+
+
+## Install
+
+### CocoaPods
+
+[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:
+
+```bash
+$ gem install cocoapods
+```
+
+To integrate SwiftTrigger into your Xcode project using CocoaPods, specify it in your `Podfile`:
+
+```ruby
+pod 'SwiftTrigger'
+```
 
 ## usage
 
