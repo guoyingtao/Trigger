@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F3841DB2001463D00EC7311 /* SwiftTriggerModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5F3841D82001463D00EC7311 /* SwiftTriggerModel.xcdatamodeld */; };
+		5F3841DC2001463D00EC7311 /* SwiftTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3841DA2001463D00EC7311 /* SwiftTrigger.swift */; };
 		5F60822A1FFDB3600043F259 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6082291FFDB3600043F259 /* AppDelegate.swift */; };
 		5F60822C1FFDB3610043F259 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F60822B1FFDB3610043F259 /* ViewController.swift */; };
 		5F60822F1FFDB3610043F259 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F60822D1FFDB3610043F259 /* Main.storyboard */; };
 		5F6082311FFDB3610043F259 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F6082301FFDB3610043F259 /* Assets.xcassets */; };
 		5F6082341FFDB3610043F259 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F6082321FFDB3610043F259 /* LaunchScreen.storyboard */; };
 		5F60823F1FFDB3610043F259 /* TriggerExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F60823E1FFDB3610043F259 /* TriggerExampleTests.swift */; };
-		5F60824D1FFDB3910043F259 /* TriggerModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5F60824A1FFDB3910043F259 /* TriggerModel.xcdatamodeld */; };
-		5F60824E1FFDB3910043F259 /* Trigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F60824C1FFDB3910043F259 /* Trigger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +28,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5F3841D92001463D00EC7311 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		5F3841DA2001463D00EC7311 /* SwiftTrigger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftTrigger.swift; path = ../../../Trigger/SwiftTrigger.swift; sourceTree = "<group>"; };
 		5F6082261FFDB3600043F259 /* TriggerExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TriggerExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F6082291FFDB3600043F259 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F60822B1FFDB3610043F259 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -38,8 +40,6 @@
 		5F60823A1FFDB3610043F259 /* TriggerExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TriggerExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F60823E1FFDB3610043F259 /* TriggerExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerExampleTests.swift; sourceTree = "<group>"; };
 		5F6082401FFDB3610043F259 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5F60824B1FFDB3910043F259 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		5F60824C1FFDB3910043F259 /* Trigger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Trigger.swift; path = ../../../Trigger/Trigger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,8 +104,8 @@
 		5F6082491FFDB3740043F259 /* Trigger */ = {
 			isa = PBXGroup;
 			children = (
-				5F60824C1FFDB3910043F259 /* Trigger.swift */,
-				5F60824A1FFDB3910043F259 /* TriggerModel.xcdatamodeld */,
+				5F3841DA2001463D00EC7311 /* SwiftTrigger.swift */,
+				5F3841D82001463D00EC7311 /* SwiftTriggerModel.xcdatamodeld */,
 			);
 			path = Trigger;
 			sourceTree = "<group>";
@@ -213,10 +213,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F60824E1FFDB3910043F259 /* Trigger.swift in Sources */,
 				5F60822C1FFDB3610043F259 /* ViewController.swift in Sources */,
+				5F3841DB2001463D00EC7311 /* SwiftTriggerModel.xcdatamodeld in Sources */,
+				5F3841DC2001463D00EC7311 /* SwiftTrigger.swift in Sources */,
 				5F60822A1FFDB3600043F259 /* AppDelegate.swift in Sources */,
-				5F60824D1FFDB3910043F259 /* TriggerModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,14 +464,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		5F60824A1FFDB3910043F259 /* TriggerModel.xcdatamodeld */ = {
+		5F3841D82001463D00EC7311 /* SwiftTriggerModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				5F60824B1FFDB3910043F259 /* Model.xcdatamodel */,
+				5F3841D92001463D00EC7311 /* Model.xcdatamodel */,
 			);
-			currentVersion = 5F60824B1FFDB3910043F259 /* Model.xcdatamodel */;
-			name = TriggerModel.xcdatamodeld;
-			path = ../../../Trigger/TriggerModel.xcdatamodeld;
+			currentVersion = 5F3841D92001463D00EC7311 /* Model.xcdatamodel */;
+			name = SwiftTriggerModel.xcdatamodeld;
+			path = ../../../Trigger/SwiftTriggerModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

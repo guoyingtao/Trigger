@@ -9,9 +9,9 @@
 import Foundation
 import CoreData
 
-public class Trigger {
+public class SwiftTrigger {
   private lazy var persistentContainer: NSPersistentContainer = {
-    let container = NSPersistentContainer(name: "TriggerModel")
+    let container = NSPersistentContainer(name: "SwiftTriggerModel")
     container.loadPersistentStores(completionHandler: { (storeDescription, error) in
       if let error = error as NSError? {
         print("Unresolved error \(error), \(error.userInfo)")
@@ -28,7 +28,7 @@ public class Trigger {
 }
 
 // MARK - public methods
-extension Trigger {
+extension SwiftTrigger {
   public func clear(id: String) {
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CounterTask")
     fetchRequest.predicate = NSPredicate(format: "id == %@", id)
@@ -86,7 +86,7 @@ extension Trigger {
 }
 
 // MARK - private methods
-extension Trigger {
+extension SwiftTrigger {
   fileprivate func getTasks(id: String) -> [CounterTask]? {
     guard managedObjectContext != nil else {
       return nil
