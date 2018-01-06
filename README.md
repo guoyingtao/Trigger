@@ -33,28 +33,28 @@ github "guoyingtao/Trigger"
 
 ### check if an event runs first time
 ```swift
-Trigger().firstRunCheck("Event1") {
+SwiftTrigger().firstRunCheck("Event1") {
   // do something
 }
 ```
 
 ### check if an event runs for the N time
 ```swift
-Trigger().check("Event2", targetCount: N) { {
+SwiftTrigger().check("Event2", targetCount: N) { {
   // do something
 }
 ```
 
 ### create an event trigged every N times
 ```swift
-Trigger().check("Event3", targetCount: N, repeatTime: 0) {
+SwiftTrigger().check("Event3", targetCount: N, repeatTime: 0) {
   // do something
 }
 ```
 
 ### create an event trigged every N times but stop after repeating M times
 ```swift
-Trigger().check("Event4", targetCount: N, repeatTime: M) {
+SwiftTrigger().check("Event4", targetCount: N, repeatTime: M) {
   // do something
 }
 ```
