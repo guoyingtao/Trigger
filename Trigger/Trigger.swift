@@ -29,7 +29,7 @@ public class Trigger {
 
 // MARK - public methods
 extension Trigger {
-  func clear(id: String) {
+  public func clear(id: String) {
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CounterTask")
     fetchRequest.predicate = NSPredicate(format: "id == %@", id)
     
@@ -37,24 +37,24 @@ extension Trigger {
     execute(request)
   }
   
-  func clearAll() {
+  public func clearAll() {
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CounterTask")
     
     let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
     execute(request)
   }
   
-  func firstRunCheck(_ id: String, action:@escaping ()-> Void) {
+  public func firstRunCheck(_ id: String, action:@escaping ()-> Void) {
     check(id, targetCount:1, action: action)
   }
   
-  func check(_ id: String, targetCount: UInt, repeatTime: UInt = 1, action:@escaping ()-> Void) {
+  public func check(_ id: String, targetCount: UInt, repeatTime: UInt = 1, action:@escaping ()-> Void) {
     if isPullTrigger(id, targetCount: targetCount, repeatTime: repeatTime) {
       action()
     }
   }
   
-  func reset(_ id: String, targetCount: UInt, repeatTime: UInt) {
+  public func reset(_ id: String, targetCount: UInt, repeatTime: UInt) {
     if let tasks = getTasks(id: id) {
       
       guard tasks.count > 0 else {
@@ -70,7 +70,7 @@ extension Trigger {
     }
   }
   
-  func getCurrentRepeatTime(_ id: String) -> Int {
+  public func getCurrentRepeatTime(_ id: String) -> Int {
     if let tasks = getTasks(id: id) {
       
       guard tasks.count > 0 else {
