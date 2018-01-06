@@ -10,8 +10,8 @@
 		5F6082081FFD87620043F259 /* Trigger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F6081FE1FFD87620043F259 /* Trigger.framework */; };
 		5F60820D1FFD87620043F259 /* TriggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F60820C1FFD87620043F259 /* TriggerTests.swift */; };
 		5F60820F1FFD87620043F259 /* Trigger.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F6082011FFD87620043F259 /* Trigger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5F60821A1FFD88830043F259 /* TriggerModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5F6082181FFD88830043F259 /* TriggerModel.xcdatamodeld */; };
-		5F60821C1FFD89650043F259 /* Trigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F60821B1FFD89650043F259 /* Trigger.swift */; };
+		5F60821A1FFD88830043F259 /* SwiftTriggerModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5F6082181FFD88830043F259 /* SwiftTriggerModel.xcdatamodeld */; };
+		5F60821C1FFD89650043F259 /* SwiftTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F60821B1FFD89650043F259 /* SwiftTrigger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,7 +32,7 @@
 		5F60820C1FFD87620043F259 /* TriggerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerTests.swift; sourceTree = "<group>"; };
 		5F60820E1FFD87620043F259 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5F6082191FFD88830043F259 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		5F60821B1FFD89650043F259 /* Trigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trigger.swift; sourceTree = "<group>"; };
+		5F60821B1FFD89650043F259 /* SwiftTrigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftTrigger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,8 +77,8 @@
 			children = (
 				5F6082011FFD87620043F259 /* Trigger.h */,
 				5F6082021FFD87620043F259 /* Info.plist */,
-				5F6082181FFD88830043F259 /* TriggerModel.xcdatamodeld */,
-				5F60821B1FFD89650043F259 /* Trigger.swift */,
+				5F6082181FFD88830043F259 /* SwiftTriggerModel.xcdatamodeld */,
+				5F60821B1FFD89650043F259 /* SwiftTrigger.swift */,
 			);
 			path = Trigger;
 			sourceTree = "<group>";
@@ -203,8 +203,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F60821C1FFD89650043F259 /* Trigger.swift in Sources */,
-				5F60821A1FFD88830043F259 /* TriggerModel.xcdatamodeld in Sources */,
+				5F60821C1FFD89650043F259 /* SwiftTrigger.swift in Sources */,
+				5F60821A1FFD88830043F259 /* SwiftTriggerModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,13 +450,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		5F6082181FFD88830043F259 /* TriggerModel.xcdatamodeld */ = {
+		5F6082181FFD88830043F259 /* SwiftTriggerModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				5F6082191FFD88830043F259 /* Model.xcdatamodel */,
 			);
 			currentVersion = 5F6082191FFD88830043F259 /* Model.xcdatamodel */;
-			path = TriggerModel.xcdatamodeld;
+			path = SwiftTriggerModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

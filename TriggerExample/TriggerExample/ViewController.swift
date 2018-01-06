@@ -30,7 +30,7 @@ class ViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    Trigger().firstRunCheck("Tip") {
+    SwiftTrigger().firstRunCheck("Tip") {
       let alertController = UIAlertController(title: "Tip", message: "Click [Clear All] Button to restart a new round test.", preferredStyle: .alert)
       let okAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
         print("You've pressed OK");
@@ -43,10 +43,10 @@ class ViewController: UITableViewController {
   @IBAction func clearAll(_ sender: Any) {
     // You can also use Trigger().clearAll(),
     // but you will see the popup alert every time when starting
-    Trigger().clear(id: "Event1")
-    Trigger().clear(id: "Event2")
-    Trigger().clear(id: "Event3")
-    Trigger().clear(id: "Event4")
+    SwiftTrigger().clear(id: "Event1")
+    SwiftTrigger().clear(id: "Event2")
+    SwiftTrigger().clear(id: "Event3")
+    SwiftTrigger().clear(id: "Event4")
     
     event1TriggedLabel.isHidden = true
     event2TriggedLabel.isHidden = true
@@ -66,7 +66,7 @@ class ViewController: UITableViewController {
   
   @IBAction func runForEvent1(_ sender: Any) {
     self.event1TriggedLabel.isHidden = true
-    Trigger().firstRunCheck("Event1") {
+    SwiftTrigger().firstRunCheck("Event1") {
       self.event1TriggedLabel.isHidden = false
     }
     even1RunTimes += 1
@@ -75,7 +75,7 @@ class ViewController: UITableViewController {
   
   @IBAction func runForEvent2(_ sender: Any) {
     self.event2TriggedLabel.isHidden = true
-    Trigger().check("Event2", targetCount: 3) {
+    SwiftTrigger().check("Event2", targetCount: 3) {
       self.event2TriggedLabel.isHidden = false
     }
     even2RunTimes += 1
@@ -84,7 +84,7 @@ class ViewController: UITableViewController {
   
   @IBAction func runForEvent3(_ sender: Any) {
     self.event3TriggedLabel.isHidden = true
-    Trigger().check("Event3", targetCount: 3, repeatTime: 0) {
+    SwiftTrigger().check("Event3", targetCount: 3, repeatTime: 0) {
       self.event3TriggedLabel.isHidden = false
     }
     even3RunTimes += 1
@@ -93,13 +93,13 @@ class ViewController: UITableViewController {
   
   @IBAction func runForEvent4(_ sender: Any) {
     self.event4TriggedLabel.isHidden = true
-    Trigger().check("Event4", targetCount: 3, repeatTime: 2) {
+    SwiftTrigger().check("Event4", targetCount: 3, repeatTime: 2) {
       self.event4TriggedLabel.isHidden = false
     }
     even4RunTimes += 1
     event4RunTimesLabel.text = String(format:"%i times", even4RunTimes)
     
-    let repeatTime = Trigger().getCurrentRepeatTime("Event4")
+    let repeatTime = SwiftTrigger().getCurrentRepeatTime("Event4")
     event4TriggedTimesLabel.text = String(format:"repeat %i times", repeatTime)
   }
 }
