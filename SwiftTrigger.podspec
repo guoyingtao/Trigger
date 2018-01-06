@@ -10,7 +10,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "SwiftTrigger"
-  s.version      = "0.1.5"
+  s.version      = "0.1.6"
   s.summary      = "SwiftTrigger is used to easily check if some events should be trigged by executing times."
 
   s.description  = <<-DESC
@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios
   s.ios.deployment_target = '10.0'
   s.source       = { :git => "https://github.com/guoyingtao/Trigger.git", :tag => "#{s.version}" }
-  s.source_files  = "Trigger/Trigger.swift"
-  s.resources = "Trigger/TriggerModel.xcdatamodeld"
+  s.source_files  = "SwiftTrigger/SwiftTrigger.swift"
+  s.resources = "SwiftTrigger/SwiftTriggerModel.xcdatamodeld"
 
 end
