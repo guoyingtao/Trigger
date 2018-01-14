@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftTrigger
 
 class ViewController: UITableViewController {
   
