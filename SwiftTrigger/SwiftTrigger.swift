@@ -9,9 +9,22 @@
 import Foundation
 import CoreData
 
+public let defaultSwiftTriggerModelPath = "Frameworks/SwiftTrigger.framework/SwiftTriggerModel.momd/Model"
+
 public class SwiftTrigger {
+  
+  private var modelPath = ""
+  
   private lazy var persistentContainer: NSPersistentContainer = {
-    let container = NSPersistentContainer(name: "SwiftTriggerModel")
+    let modelURL = Bundle.main.url(forResource: modelPath, withExtension: "mom")
+    var container: NSPersistentContainer
+    
+    if let model = modelURL.flatMap(NSManagedObjectModel.init) {
+      container = NSPersistentContainer(name: "SwiftTriggerModel", managedObjectModel: model)
+    } else {
+      container = NSPersistentContainer(name: "SwiftTriggerModel")
+    }
+    
     container.loadPersistentStores(completionHandler: { (storeDescription, error) in
       if let error = error as NSError? {
         print("Unresolved error \(error), \(error.userInfo)")
@@ -22,7 +35,8 @@ public class SwiftTrigger {
   
   private var managedObjectContext: NSManagedObjectContext!
   
-  public init() {
+  public init(modelPath: String = defaultSwiftTriggerModelPath) {
+    self.modelPath = modelPath
     managedObjectContext = persistentContainer.viewContext
   }
 }
