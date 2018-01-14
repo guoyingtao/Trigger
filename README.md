@@ -59,3 +59,14 @@ SwiftTrigger().check("Event4", targetCount: N, repeatTime: M) {
 }
 ```
 
+### clear an event
+```swift
+SwiftTrigger().clear("Event1")
+```
+
+### clear all events
+```swift
+SwiftTrigger().clearAll()
+```
+
+
