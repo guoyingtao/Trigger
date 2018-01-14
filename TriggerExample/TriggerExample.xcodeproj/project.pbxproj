@@ -7,14 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D179329EEED4B316112300B /* Pods_TriggerExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9DB20B4F2E47162C0B25944 /* Pods_TriggerExample.framework */; };
 		5F60822A1FFDB3600043F259 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6082291FFDB3600043F259 /* AppDelegate.swift */; };
 		5F60822C1FFDB3610043F259 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F60822B1FFDB3610043F259 /* ViewController.swift */; };
 		5F60822F1FFDB3610043F259 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F60822D1FFDB3610043F259 /* Main.storyboard */; };
 		5F6082311FFDB3610043F259 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F6082301FFDB3610043F259 /* Assets.xcassets */; };
 		5F6082341FFDB3610043F259 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F6082321FFDB3610043F259 /* LaunchScreen.storyboard */; };
 		5F60823F1FFDB3610043F259 /* TriggerExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F60823E1FFDB3610043F259 /* TriggerExampleTests.swift */; };
-		5FF1BA6420014E5F00D997C6 /* SwiftTriggerModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5FF1BA6120014E5F00D997C6 /* SwiftTriggerModel.xcdatamodeld */; };
-		5FF1BA6520014E5F00D997C6 /* SwiftTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FF1BA6320014E5F00D997C6 /* SwiftTrigger.swift */; };
+		5FE617C0200BC6D80080EF6B /* SwiftTriggerModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5FE617BD200BC6D70080EF6B /* SwiftTriggerModel.xcdatamodeld */; };
+		5FE617C1200BC6D80080EF6B /* SwiftTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE617BF200BC6D70080EF6B /* SwiftTrigger.swift */; };
+		F82C33A28F2A59256516F716 /* Pods_TriggerExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0028DBBBF57DEAF8B19AD4B6 /* Pods_TriggerExampleTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +30,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0028DBBBF57DEAF8B19AD4B6 /* Pods_TriggerExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TriggerExampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BDA105380FDB5446EE050E3 /* Pods-TriggerExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TriggerExampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TriggerExampleTests/Pods-TriggerExampleTests.release.xcconfig"; sourceTree = "<group>"; };
+		54C61C726DD3EBE76C8A5869 /* Pods-TriggerExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TriggerExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TriggerExample/Pods-TriggerExample.debug.xcconfig"; sourceTree = "<group>"; };
 		5F6082261FFDB3600043F259 /* TriggerExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TriggerExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F6082291FFDB3600043F259 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F60822B1FFDB3610043F259 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -38,8 +43,11 @@
 		5F60823A1FFDB3610043F259 /* TriggerExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TriggerExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F60823E1FFDB3610043F259 /* TriggerExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerExampleTests.swift; sourceTree = "<group>"; };
 		5F6082401FFDB3610043F259 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5FF1BA6220014E5F00D997C6 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		5FF1BA6320014E5F00D997C6 /* SwiftTrigger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftTrigger.swift; path = ../../../SwiftTrigger/SwiftTrigger.swift; sourceTree = "<group>"; };
+		5FE617BE200BC6D70080EF6B /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		5FE617BF200BC6D70080EF6B /* SwiftTrigger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftTrigger.swift; path = ../../../SwiftTrigger/SwiftTrigger.swift; sourceTree = "<group>"; };
+		A9DB20B4F2E47162C0B25944 /* Pods_TriggerExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TriggerExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3B9839D64A0E9496901EBB6 /* Pods-TriggerExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TriggerExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-TriggerExample/Pods-TriggerExample.release.xcconfig"; sourceTree = "<group>"; };
+		F4705BE62A4BAEA02FCC4CE8 /* Pods-TriggerExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TriggerExampleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TriggerExampleTests/Pods-TriggerExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D179329EEED4B316112300B /* Pods_TriggerExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,18 +63,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F82C33A28F2A59256516F716 /* Pods_TriggerExampleTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		511A626065FDD6DFE9D1061C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A9DB20B4F2E47162C0B25944 /* Pods_TriggerExample.framework */,
+				0028DBBBF57DEAF8B19AD4B6 /* Pods_TriggerExampleTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5F60821D1FFDB3600043F259 = {
 			isa = PBXGroup;
 			children = (
 				5F6082281FFDB3600043F259 /* TriggerExample */,
 				5F60823D1FFDB3610043F259 /* TriggerExampleTests */,
 				5F6082271FFDB3600043F259 /* Products */,
+				F3045E772E9CFFC02B9570B2 /* Pods */,
+				511A626065FDD6DFE9D1061C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,7 +102,7 @@
 		5F6082281FFDB3600043F259 /* TriggerExample */ = {
 			isa = PBXGroup;
 			children = (
-				5F6082491FFDB3740043F259 /* SwiftTrigger */,
+				5FE617BC200BC6B50080EF6B /* SwiftTrigger */,
 				5F6082291FFDB3600043F259 /* AppDelegate.swift */,
 				5F60822B1FFDB3610043F259 /* ViewController.swift */,
 				5F60822D1FFDB3610043F259 /* Main.storyboard */,
@@ -101,13 +122,24 @@
 			path = TriggerExampleTests;
 			sourceTree = "<group>";
 		};
-		5F6082491FFDB3740043F259 /* SwiftTrigger */ = {
+		5FE617BC200BC6B50080EF6B /* SwiftTrigger */ = {
 			isa = PBXGroup;
 			children = (
-				5FF1BA6320014E5F00D997C6 /* SwiftTrigger.swift */,
-				5FF1BA6120014E5F00D997C6 /* SwiftTriggerModel.xcdatamodeld */,
+				5FE617BF200BC6D70080EF6B /* SwiftTrigger.swift */,
+				5FE617BD200BC6D70080EF6B /* SwiftTriggerModel.xcdatamodeld */,
 			);
 			path = SwiftTrigger;
+			sourceTree = "<group>";
+		};
+		F3045E772E9CFFC02B9570B2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				54C61C726DD3EBE76C8A5869 /* Pods-TriggerExample.debug.xcconfig */,
+				B3B9839D64A0E9496901EBB6 /* Pods-TriggerExample.release.xcconfig */,
+				F4705BE62A4BAEA02FCC4CE8 /* Pods-TriggerExampleTests.debug.xcconfig */,
+				2BDA105380FDB5446EE050E3 /* Pods-TriggerExampleTests.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -117,9 +149,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5F6082431FFDB3610043F259 /* Build configuration list for PBXNativeTarget "TriggerExample" */;
 			buildPhases = (
+				DF0E4B213BF742C0647B1067 /* [CP] Check Pods Manifest.lock */,
 				5F6082221FFDB3600043F259 /* Sources */,
 				5F6082231FFDB3600043F259 /* Frameworks */,
 				5F6082241FFDB3600043F259 /* Resources */,
+				5E56D6DAC132F59B9B7AE029 /* [CP] Embed Pods Frameworks */,
+				B07EFE0DF852E5C0F585367D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -134,9 +169,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5F6082461FFDB3610043F259 /* Build configuration list for PBXNativeTarget "TriggerExampleTests" */;
 			buildPhases = (
+				D92FC78650A75D411AAC8BA1 /* [CP] Check Pods Manifest.lock */,
 				5F6082361FFDB3610043F259 /* Sources */,
 				5F6082371FFDB3610043F259 /* Frameworks */,
 				5F6082381FFDB3610043F259 /* Resources */,
+				547B237175851829BECA8A58 /* [CP] Embed Pods Frameworks */,
+				9FC7462EE7EEE3D65407AF2A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -208,14 +246,116 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		547B237175851829BECA8A58 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TriggerExampleTests/Pods-TriggerExampleTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5E56D6DAC132F59B9B7AE029 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TriggerExample/Pods-TriggerExample-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SwiftTrigger/SwiftTrigger.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftTrigger.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TriggerExample/Pods-TriggerExample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9FC7462EE7EEE3D65407AF2A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TriggerExampleTests/Pods-TriggerExampleTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B07EFE0DF852E5C0F585367D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TriggerExample/Pods-TriggerExample-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D92FC78650A75D411AAC8BA1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TriggerExampleTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DF0E4B213BF742C0647B1067 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TriggerExample-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5F6082221FFDB3600043F259 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				5F60822C1FFDB3610043F259 /* ViewController.swift in Sources */,
-				5FF1BA6420014E5F00D997C6 /* SwiftTriggerModel.xcdatamodeld in Sources */,
-				5FF1BA6520014E5F00D997C6 /* SwiftTrigger.swift in Sources */,
+				5FE617C0200BC6D80080EF6B /* SwiftTriggerModel.xcdatamodeld in Sources */,
+				5FE617C1200BC6D80080EF6B /* SwiftTrigger.swift in Sources */,
 				5F60822A1FFDB3600043F259 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -367,6 +507,7 @@
 		};
 		5F6082441FFDB3610043F259 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 54C61C726DD3EBE76C8A5869 /* Pods-TriggerExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -383,6 +524,7 @@
 		};
 		5F6082451FFDB3610043F259 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B3B9839D64A0E9496901EBB6 /* Pods-TriggerExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -399,6 +541,7 @@
 		};
 		5F6082471FFDB3610043F259 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4705BE62A4BAEA02FCC4CE8 /* Pods-TriggerExampleTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -416,6 +559,7 @@
 		};
 		5F6082481FFDB3610043F259 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2BDA105380FDB5446EE050E3 /* Pods-TriggerExampleTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -464,12 +608,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		5FF1BA6120014E5F00D997C6 /* SwiftTriggerModel.xcdatamodeld */ = {
+		5FE617BD200BC6D70080EF6B /* SwiftTriggerModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				5FF1BA6220014E5F00D997C6 /* Model.xcdatamodel */,
+				5FE617BE200BC6D70080EF6B /* Model.xcdatamodel */,
 			);
-			currentVersion = 5FF1BA6220014E5F00D997C6 /* Model.xcdatamodel */;
+			currentVersion = 5FE617BE200BC6D70080EF6B /* Model.xcdatamodel */;
 			name = SwiftTriggerModel.xcdatamodeld;
 			path = ../../../SwiftTrigger/SwiftTriggerModel.xcdatamodeld;
 			sourceTree = "<group>";
