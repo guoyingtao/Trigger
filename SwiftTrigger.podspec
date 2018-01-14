@@ -10,7 +10,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "SwiftTrigger"
-  s.version      = "0.1.7"
+  s.version      = "0.1.8"
   s.summary      = "SwiftTrigger is used to easily check if some events should be trigged by executing times."
 
   s.description  = <<-DESC
