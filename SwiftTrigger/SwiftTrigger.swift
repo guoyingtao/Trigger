@@ -13,7 +13,7 @@ public class SwiftTrigger {
   
   private lazy var persistentContainer: NSPersistentContainer = {
     let bundleURL = Bundle(for: SwiftTrigger.self)
-    let modelURL = bundleURL.url(forResource: "Model", withExtension: "mom", subdirectory:"YourDatabaseName.momd")
+    let modelURL = bundleURL.url(forResource: "Model", withExtension: "mom", subdirectory:"SwiftTriggerModel.momd")
 
     var container: NSPersistentContainer
     

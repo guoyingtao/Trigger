@@ -1,12 +1,12 @@
 PODS:
-  - SwiftTrigger (0.1.8)
+  - SwiftTrigger (0.1.9)
 
 DEPENDENCIES:
-  - SwiftTrigger (~> 0.1.8)
+  - SwiftTrigger (~> 0.1.9)
 
 SPEC CHECKSUMS:
-  SwiftTrigger: 03c4f68eb60957089e0f909a0c4e37d10974637d
+  SwiftTrigger: 41a63714a40b33f24842c0cfd5ae1a83d2f7d6d1
 
-PODFILE CHECKSUM: 26869708a10e19cac615564faead3ea09b31f980
+PODFILE CHECKSUM: 71e32da294bbe490148b5583ae06c3bc0a513c46
 
 COCOAPODS: 1.3.1

@@ -6,7 +6,7 @@ target 'TriggerExample' do
   use_frameworks!
 
   # Pods for TriggerExample
-  pod 'SwiftTrigger', '~> 0.1.9'
+  pod 'SwiftTrigger', '~> 0.1.10'
 
   target 'TriggerExampleTests' do
     inherit! :search_paths
