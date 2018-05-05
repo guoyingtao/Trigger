@@ -1,6 +1,6 @@
 //
-//  Trigger.swift
-//  Trigger
+//  SwiftTrigger.swift
+//  SwiftTrigger
 //
 //  Created by Echo on 1/3/18.
 //  Copyright © 2018 Echo. All rights reserved.
@@ -9,14 +9,12 @@
 import Foundation
 import CoreData
 
-public let defaultSwiftTriggerModelPath = "Frameworks/SwiftTrigger.framework/SwiftTriggerModel.momd/Model"
-
 public class SwiftTrigger {
   
-  private var modelPath = ""
-  
   private lazy var persistentContainer: NSPersistentContainer = {
-    let modelURL = Bundle.main.url(forResource: modelPath, withExtension: "mom")
+    let bundleURL = Bundle(for: SwiftTrigger.self)
+    let modelURL = bundleURL.url(forResource: "Model", withExtension: "mom", subdirectory:"YourDatabaseName.momd")
+
     var container: NSPersistentContainer
     
     if let model = modelURL.flatMap(NSManagedObjectModel.init) {
@@ -35,8 +33,7 @@ public class SwiftTrigger {
   
   private var managedObjectContext: NSManagedObjectContext!
   
-  public init(modelPath: String = defaultSwiftTriggerModelPath) {
-    self.modelPath = modelPath
+  public init() {
     managedObjectContext = persistentContainer.viewContext
   }
 }
@@ -169,9 +166,6 @@ extension SwiftTrigger {
     }
     
     save()
-    
-//    let t = getCurrentRepeatTime(task.id!)
-//    print("\(task.id!) repeat time is \(t)")
     
     return pullTrigger
   }
