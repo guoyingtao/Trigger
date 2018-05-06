@@ -29,6 +29,6 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '10.0'
   s.source       = { :git => "https://github.com/guoyingtao/Trigger.git", :tag => "#{s.version}" }
   s.source_files  = "SwiftTrigger/SwiftTrigger.swift"
-  s.resource_bundles = {s.name => ["SwiftTrigger/*.xcdatamodeld"]}
+  s.resource_bundles = {s.name => ['SwiftTrigger/*.xcdatamodeld']}
 
 end
