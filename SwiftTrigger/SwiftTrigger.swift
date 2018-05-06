@@ -11,16 +11,18 @@ import CoreData
 
 public class SwiftTrigger {
   
+  private let databaseName = "SwiftTriggerModel"
+  
   private lazy var persistentContainer: NSPersistentContainer = {
     let bundleURL = Bundle(for: SwiftTrigger.self)
-    let modelURL = bundleURL.url(forResource: "Model", withExtension: "mom", subdirectory:"SwiftTriggerModel.momd")
+    let modelURL = bundleURL.url(forResource: databaseName, withExtension: "momd")
 
     var container: NSPersistentContainer
     
     if let model = modelURL.flatMap(NSManagedObjectModel.init) {
-      container = NSPersistentContainer(name: "SwiftTriggerModel", managedObjectModel: model)
+      container = NSPersistentContainer(name: databaseName, managedObjectModel: model)
     } else {
-      container = NSPersistentContainer(name: "SwiftTriggerModel")
+      container = NSPersistentContainer(name: databaseName)
     }
     
     container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -40,7 +42,7 @@ public class SwiftTrigger {
 
 // MARK - public methods
 extension SwiftTrigger {
-  public func clear(id: String) {
+  public func clear(byId id: String) {
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CounterTask")
     fetchRequest.predicate = NSPredicate(format: "id == %@", id)
     
@@ -55,11 +57,11 @@ extension SwiftTrigger {
     execute(request)
   }
   
-  public func firstRunCheck(_ id: String, action:@escaping ()-> Void) {
-    check(id, targetCount:1, action: action)
+  public func firstRunCheck(forId id: String, action:@escaping ()-> Void) {
+    check(byId:id, targetCount:1, action: action)
   }
   
-  public func check(_ id: String, targetCount: UInt, repeatTime: UInt = 1, action:@escaping ()-> Void) {
+  public func check(byId id: String, targetCount: UInt, repeatTime: UInt = 1, action:@escaping ()-> Void) {
     if isPullTrigger(id, targetCount: targetCount, repeatTime: repeatTime) {
       action()
     }
@@ -81,7 +83,7 @@ extension SwiftTrigger {
     }
   }
   
-  public func getCurrentRepeatTime(_ id: String) -> Int {
+  public func getCurrentRepeatTime(byId id: String) -> Int {
     if let tasks = getTasks(id: id) {
       
       guard tasks.count > 0 else {
@@ -197,8 +199,8 @@ extension SwiftTrigger {
     do {
       try managedObjectContext.execute(request)
     } catch {
-      let nserror = error as NSError
-      print("Unresolved error \(nserror), \(nserror.userInfo)")
+      let error = error as NSError
+      print("Unresolved error \(error), \(error.userInfo)")
     }
   }
 }
