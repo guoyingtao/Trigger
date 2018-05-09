@@ -9,41 +9,63 @@
 import Foundation
 import CoreData
 
+enum Entity: String {
+  case CounterTask = "CounterTask"
+}
+
 public class SwiftTrigger {
   
+  /**
+   Subclass NSPersistentContainer to provide a customized
+   storage path for core data database.
+   */
+  class MyPersistentContainer: NSPersistentContainer {
+    override open class func defaultDirectoryURL() -> URL {
+      let urls = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)
+      let url = urls[urls.count - 1].appendingPathComponent("SwiftTriggerDB")
+      return url
+    }
+  }
+
   private let databaseName = "SwiftTriggerModel"
   
-  private lazy var persistentContainer: NSPersistentContainer = {
+  private lazy var persistentContainer: NSPersistentContainer? = {
     let bundleURL = Bundle(for: SwiftTrigger.self)
     let modelURL = bundleURL.url(forResource: databaseName, withExtension: "momd")
 
-    var container: NSPersistentContainer
+    var container: MyPersistentContainer
     
-    if let model = modelURL.flatMap(NSManagedObjectModel.init) {
-      container = NSPersistentContainer(name: databaseName, managedObjectModel: model)
-    } else {
-      container = NSPersistentContainer(name: databaseName)
+    guard let model = modelURL.flatMap(NSManagedObjectModel.init) else {
+      print("Fail to load the trigger model!")
+      return nil
     }
     
+    container = MyPersistentContainer(name: databaseName, managedObjectModel: model)
     container.loadPersistentStores(completionHandler: { (storeDescription, error) in
       if let error = error as NSError? {
         print("Unresolved error \(error), \(error.userInfo)")
       }
     })
+    
     return container
   }()
   
-  private var managedObjectContext: NSManagedObjectContext!
+  private var managedObjectContext: NSManagedObjectContext?
   
-  public init() {
-    managedObjectContext = persistentContainer.viewContext
+  public init?() {
+    managedObjectContext = persistentContainer?.viewContext
+    
+    guard managedObjectContext != nil else {
+      print("Cann't get right managed object context.")
+      return nil
+    }
   }
 }
 
 // MARK - public methods
 extension SwiftTrigger {
   public func clear(byId id: String) {
-    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CounterTask")
+    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Entity.CounterTask.rawValue)
     fetchRequest.predicate = NSPredicate(format: "id == %@", id)
     
     let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
@@ -51,7 +73,7 @@ extension SwiftTrigger {
   }
   
   public func clearAll() {
-    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CounterTask")
+    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Entity.CounterTask.rawValue)
     
     let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
     execute(request)
@@ -100,8 +122,9 @@ extension SwiftTrigger {
 
 // MARK - private methods
 extension SwiftTrigger {
+  
   fileprivate func getTasks(id: String) -> [CounterTask]? {
-    guard managedObjectContext != nil else {
+    guard let managedObjectContext = managedObjectContext else {
       return nil
     }
     
@@ -173,7 +196,11 @@ extension SwiftTrigger {
   }
   
   fileprivate func addNewTask(id: String, targetCount: UInt, repeatTime: UInt = 1) {
-    let task = NSEntityDescription.insertNewObject(forEntityName: "CounterTask", into: managedObjectContext) as! CounterTask
+    guard let managedObjectContext = managedObjectContext else {
+      return
+    }
+    
+    let task = NSEntityDescription.insertNewObject(forEntityName: Entity.CounterTask.rawValue, into: managedObjectContext) as! CounterTask
     task.id = id
     task.currentCount = 1
     task.targetCount = Int32(targetCount)
@@ -185,6 +212,10 @@ extension SwiftTrigger {
   }
   
   fileprivate func save() {
+    guard let managedObjectContext = managedObjectContext else {
+      return
+    }
+    
     if managedObjectContext.hasChanges {
       do {
         try managedObjectContext.save()
@@ -196,6 +227,10 @@ extension SwiftTrigger {
   }
   
   fileprivate func execute(_ request: NSPersistentStoreRequest) {
+    guard let managedObjectContext = managedObjectContext else {
+      return
+    }
+    
     do {
       try managedObjectContext.execute(request)
     } catch {
