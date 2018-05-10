@@ -3,10 +3,10 @@
 # SwiftTrigger
 
 SwiftTrigger is used to easily check if some events should be trigged by executing times:
-- The first time
-- The N time
-- every N times
-- every N times but stop after repeating M times
+- The first time run
+- The Nth time run
+- every N times run
+- every N times run but stops after repeating M times
 
 ## Requirements
 
@@ -20,7 +20,7 @@ SwiftTrigger is used to easily check if some events should be trigged by executi
 To integrate SwiftTrigger into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
-pod 'SwiftTrigger', '~> 0.1.10'
+pod 'SwiftTrigger', '~> 0.1.13'
 ```
 
 ### Cathage
@@ -33,39 +33,37 @@ github "guoyingtao/Trigger"
 
 ### check if an event runs first time
 ```swift
-SwiftTrigger().firstRunCheck("Event1") {
+SwiftTrigger().firstRunCheck(byEventId: "Event1") {
   // do something
 }
 ```
 
 ### check if an event runs for the N time
 ```swift
-SwiftTrigger().check("Event2", targetCount: N) { {
+SwiftTrigger().check(byEventId: "Event2", targetCount: N) { {
   // do something
 }
 ```
 
 ### create an event trigged every N times
 ```swift
-SwiftTrigger().check("Event3", targetCount: N, repeatTime: 0) {
+SwiftTrigger().check(byEventId: "Event3", targetCount: N, repeatTime: 0) {
   // do something
 }
 ```
 
 ### create an event trigged every N times but stop after repeating M times
 ```swift
-SwiftTrigger().check("Event4", targetCount: N, repeatTime: M) {
+SwiftTrigger().check(byEventId: "Event4", targetCount: N, repeatTime: M) {
   // do something
 }
 ```
 
-### clear an event
+### clear events
 ```swift
-SwiftTrigger().clear("Event1")
-```
-
-### clear all events
-```swift
+SwiftTrigger().clear(byEventId: "Event1")
+SwiftTrigger().clear(byEventIdList: "Event1", "Event2")
+SwiftTrigger().clear(byEventIdList: ["Event1", "Event2"])
 SwiftTrigger().clearAll()
 ```
 
