@@ -393,7 +393,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3V26Q55U3S;
-				INFOPLIST_FILE = TriggerTests/Info.plist;
+				INFOPLIST_FILE = SwiftTriggerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.echo.TriggerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -408,7 +408,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3V26Q55U3S;
-				INFOPLIST_FILE = TriggerTests/Info.plist;
+				INFOPLIST_FILE = SwiftTriggerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.echo.TriggerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -28,7 +28,6 @@ public class SwiftTrigger {
   }
 
   private let databaseName = "SwiftTriggerModel"
-  
   private lazy var persistentContainer: NSPersistentContainer? = {
     let bundleURL = Bundle(for: SwiftTrigger.self)
     let modelURL = bundleURL.url(forResource: databaseName, withExtension: "momd")
@@ -67,14 +66,12 @@ extension SwiftTrigger {
   public func clear(byId id: String) {
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Entity.CounterTask.rawValue)
     fetchRequest.predicate = NSPredicate(format: "id == %@", id)
-    
     let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
     execute(request)
   }
   
   public func clearAll() {
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Entity.CounterTask.rawValue)
-    
     let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
     execute(request)
   }
@@ -89,7 +86,7 @@ extension SwiftTrigger {
     }
   }
   
-  public func reset(_ id: String, targetCount: UInt, repeatTime: UInt) {
+  public func reset(byId id: String, targetCount: UInt, repeatTime: UInt) {
     if let tasks = getTasks(id: id) {
       
       guard tasks.count > 0 else {
@@ -120,6 +117,58 @@ extension SwiftTrigger {
   }
 }
 
+// MARK - private methods for pull trigger
+extension SwiftTrigger {
+  private func isPullTrigger(_ id: String, targetCount: UInt = 1, repeatTime: UInt = 1) -> Bool {
+    if let tasks = getTasks(id: id) {
+      if tasks.count > 0 {
+        return checkIsPullTrigger(byTask: tasks[0])
+      } else {
+        addNewTask(id: id, targetCount: targetCount, repeatTime: repeatTime)
+        /// When users want to trigger something when the event with specified id first run, pull trigger.
+        return targetCount == 1
+      }
+    } else {
+      return false
+    }
+  }
+  
+  private func checkIsPullTrigger(byTask task: CounterTask) -> Bool {
+    guard task.valid else {
+      return false
+    }
+    
+    /** Every time when deciding if pulling trigger, we have actually
+     executed the task. So we plus 1 to task.currentCount */
+    task.currentCount += 1
+    var pullTrigger = false
+    
+    if(task.currentCount == task.targetCount) {
+      if task.repeatTime == 0 { /// valid forever
+        task.valid = true
+        task.currentCount = 0
+        pullTrigger = true
+      } else {
+        task.currentRepeatTime += 1
+        
+        if (task.currentRepeatTime >= task.repeatTime) {
+          task.valid = false
+        } else {
+          /// reset to begin next round counting
+          task.currentCount = 0
+        }
+        
+        pullTrigger = true
+      }
+    }
+    
+    save()
+    
+    return pullTrigger
+  }
+}
+
+
 // MARK - private methods
 extension SwiftTrigger {
   
@@ -128,7 +177,7 @@ extension SwiftTrigger {
       return nil
     }
     
-    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CounterTask")
+    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Entity.CounterTask.rawValue)
     fetchRequest.predicate = NSPredicate(format: "id == %@", id)
     
     do {
@@ -150,52 +199,7 @@ extension SwiftTrigger {
     }
   }
   
-  fileprivate func isPullTrigger(_ id: String, targetCount: UInt = 1, repeatTime: UInt = 1) -> Bool {
-    if let tasks = getTasks(id: id) {
-      guard tasks.count > 0 else {
-        addNewTask(id: id, targetCount: targetCount, repeatTime: repeatTime)
-        return targetCount == 1
-      }
-      
-      return isPullTrigger(task: tasks[0])
-    } else {
-      return false
-    }
-  }
-  
-  fileprivate func isPullTrigger(task: CounterTask) -> Bool {
-    guard task.valid else {
-      return false
-    }
-    
-    task.currentCount += 1
-    var pullTrigger = false
-    
-    if(task.currentCount == task.targetCount) {
-      if task.repeatTime == 0 {
-        task.currentCount = 0
-        pullTrigger = true
-      } else {
-        task.currentRepeatTime += 1
-        if (task.currentRepeatTime <= task.repeatTime) {
-          task.currentCount = 0
-          pullTrigger = true
-        }
-      }
-    }
-    
-    // if repeatTime == 0 then it is always valid
-    if (task.currentRepeatTime > task.repeatTime) {
-      task.currentRepeatTime = task.repeatTime
-      task.valid = false
-    }
-    
-    save()
-    
-    return pullTrigger
-  }
-  
-  fileprivate func addNewTask(id: String, targetCount: UInt, repeatTime: UInt = 1) {
+  fileprivate func addNewTask(id: String, targetCount: UInt, repeatTime: UInt = 1){
     guard let managedObjectContext = managedObjectContext else {
       return
     }
@@ -206,7 +210,7 @@ extension SwiftTrigger {
     task.targetCount = Int32(targetCount)
     task.repeatTime = Int32(repeatTime)
     task.currentRepeatTime = 0
-    task.valid = true
+    task.valid = (targetCount == 1) ? false : true
     
     save()
   }
