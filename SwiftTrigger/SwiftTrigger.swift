@@ -63,6 +63,17 @@ public class SwiftTrigger {
 
 // MARK - public methods
 extension SwiftTrigger {
+  public func clear(byIdList list: String...) {
+    clear(byIdList: list)
+  }
+  
+  public func clear(byIdList list: [String]) {
+    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Entity.CounterTask.rawValue)
+    fetchRequest.predicate = NSPredicate(format: "id IN %@", list)
+    let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+    execute(request)
+  }
+  
   public func clear(byId id: String) {
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Entity.CounterTask.rawValue)
     fetchRequest.predicate = NSPredicate(format: "id == %@", id)
