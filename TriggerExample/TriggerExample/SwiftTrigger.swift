@@ -63,6 +63,16 @@ public class SwiftTrigger {
 
 // MARK - TriggerProtocal
 extension SwiftTrigger: TriggerProtocal {
+  public func firstRunCheck(byEventId id: String, action:@escaping ()->Void) {
+    check(byEventId:id, targetCount:1, action: action)
+  }
+  
+  public func check(byEventId id: String, targetCount: UInt, repeatTime: UInt = 1, action:@escaping ()->Void) {
+    if isPullTrigger(id, targetCount: targetCount, repeatTime: repeatTime) {
+      action()
+    }
+  }
+
   public func clear(byEventIdList list: String...) {
     clear(byEventIdList: list)
   }
@@ -85,16 +95,6 @@ extension SwiftTrigger: TriggerProtocal {
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Entity.CounterTask.rawValue)
     let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
     execute(request)
-  }
-  
-  public func firstRunCheck(byEventId id: String, action:@escaping ()->Void) {
-    check(byEventId:id, targetCount:1, action: action)
-  }
-  
-  public func check(byEventId id: String, targetCount: UInt, repeatTime: UInt = 1, action:@escaping ()->Void) {
-    if isPullTrigger(id, targetCount: targetCount, repeatTime: repeatTime) {
-      action()
-    }
   }
 }
 
@@ -189,8 +189,7 @@ extension SwiftTrigger {
 
 
 // MARK - private methods
-extension SwiftTrigger {
-  
+extension SwiftTrigger {  
   fileprivate func getTasks(id: String) -> [CounterTask]? {
     guard let managedObjectContext = managedObjectContext else {
       return nil

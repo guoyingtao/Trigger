@@ -9,7 +9,7 @@
 import Foundation
 
 protocol TriggerProtocal {
-  // If a event is ran for the first time, then execute an action
+  /// If a event is ran for the first time, then execute an action
   func firstRunCheck(byEventId id: String, action:@escaping ()->Void)
   
   /**
@@ -25,6 +25,7 @@ protocol TriggerProtocal {
              action:@escaping ()->Void)
   
   
+  /// clear functions can make checking event to start over
   func clear(byEventIdList list: String...)
   func clear(byEventIdList list: [String])
   func clear(byEventId id: String)
