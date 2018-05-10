@@ -84,7 +84,7 @@ class TriggerTests: XCTestCase {
       let event = "Event"
       var fired = false
       
-      for _ in 1...10 {
+      for _ in 1...10 { // Repeat cycle
         for i in 1...target {
           trigger.check(byId: event, targetCount: target, repeatTime: repeatTime) {
             fired = true
@@ -128,6 +128,18 @@ class TriggerTests: XCTestCase {
         }
       }
     }
+  }
+  
+  func testClear() {
+    // TODO: to do
+  }
+  
+  func testReset() {
+    // TODO: to do
+  }
+  
+  func testGetRepeatTime() {
+    // TODO: to do
   }
   
   func testExample() {
