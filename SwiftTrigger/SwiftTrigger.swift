@@ -61,20 +61,20 @@ public class SwiftTrigger {
   }
 }
 
-// MARK - public methods
-extension SwiftTrigger {
-  public func clear(byIdList list: String...) {
-    clear(byIdList: list)
+// MARK - TriggerProtocal
+extension SwiftTrigger: TriggerProtocal {
+  public func clear(byEventIdList list: String...) {
+    clear(byEventIdList: list)
   }
   
-  public func clear(byIdList list: [String]) {
+  public func clear(byEventIdList list: [String]) {
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Entity.CounterTask.rawValue)
     fetchRequest.predicate = NSPredicate(format: "id IN %@", list)
     let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
     execute(request)
   }
   
-  public func clear(byId id: String) {
+  public func clear(byEventId id: String) {
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Entity.CounterTask.rawValue)
     fetchRequest.predicate = NSPredicate(format: "id == %@", id)
     let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
@@ -87,21 +87,24 @@ extension SwiftTrigger {
     execute(request)
   }
   
-  public func firstRunCheck(forId id: String, action:@escaping ()-> Void) {
-    check(byId:id, targetCount:1, action: action)
+  public func firstRunCheck(byEventId id: String, action:@escaping ()->Void) {
+    check(byEventId:id, targetCount:1, action: action)
   }
   
-  public func check(byId id: String, targetCount: UInt, repeatTime: UInt = 1, action:@escaping ()-> Void) {
+  public func check(byEventId id: String, targetCount: UInt, repeatTime: UInt = 1, action:@escaping ()->Void) {
     if isPullTrigger(id, targetCount: targetCount, repeatTime: repeatTime) {
       action()
     }
   }
-  
-  public func reset(byId id: String, targetCount: UInt, repeatTime: UInt) {
+}
+
+// MARK - internal methods for inside test
+extension SwiftTrigger {
+  internal func reset(byEventId id: String, targetCount: UInt, repeatTime: UInt) -> CounterTask? {
     if let tasks = getTasks(id: id) {
       
       guard tasks.count > 0 else {
-        return
+        return nil
       }
       
       let task = tasks[0]
@@ -109,11 +112,16 @@ extension SwiftTrigger {
       task.currentRepeatTime = 0
       task.targetCount = Int32(targetCount)
       task.repeatTime = Int32(repeatTime)
+      task.valid = true
       save()
+      
+      return task
+    } else {
+      return nil
     }
   }
-  
-  public func getCurrentRepeatTime(byId id: String) -> Int {
+
+  internal func getCurrentRepeatTime(byEventId id: String) -> Int {
     if let tasks = getTasks(id: id) {
       
       guard tasks.count > 0 else {

@@ -32,14 +32,14 @@ class TriggerTests: XCTestCase {
     if let trigger = trigger {
       var fired = false
       let event = "Event"
-      trigger.firstRunCheck(forId: event) {
+      trigger.firstRunCheck(byEventId: event) {
         fired = true
       }
       
       XCTAssertTrue(fired)
       fired = false
       
-      trigger.firstRunCheck(forId: event) {
+      trigger.firstRunCheck(byEventId: event) {
         fired = true
       }
       
@@ -54,7 +54,7 @@ class TriggerTests: XCTestCase {
       var fired = false
       
       for i in 1...target {
-        trigger.check(byId: event, targetCount: target) {
+        trigger.check(byEventId: event, targetCount: target) {
           fired = true
         }
         
@@ -67,7 +67,7 @@ class TriggerTests: XCTestCase {
       }
       
       for _ in 1...100 {
-        trigger.check(byId: event, targetCount: target) {
+        trigger.check(byEventId: event, targetCount: target) {
           fired = true
         }
         
@@ -86,7 +86,7 @@ class TriggerTests: XCTestCase {
       
       for _ in 1...10 { // Repeat cycle
         for i in 1...target {
-          trigger.check(byId: event, targetCount: target, repeatTime: repeatTime) {
+          trigger.check(byEventId: event, targetCount: target, repeatTime: repeatTime) {
             fired = true
           }
           
@@ -111,7 +111,7 @@ class TriggerTests: XCTestCase {
       
       for cycle in 1...10 {
         for i in 1...target {
-          trigger.check(byId: event, targetCount: target, repeatTime: repeatTime) {
+          trigger.check(byEventId: event, targetCount: target, repeatTime: repeatTime) {
             fired = true
           }
           
@@ -131,15 +131,80 @@ class TriggerTests: XCTestCase {
   }
   
   func testClear() {
-    // TODO: to do
-  }
-  
-  func testReset() {
-    // TODO: to do
-  }
-  
-  func testGetRepeatTime() {
-    // TODO: to do
+    if let trigger = trigger {
+      var fired1 = false
+      var fired2 = false
+      let event1 = "Event1"
+      let event2 = "Event2"
+      trigger.firstRunCheck(byEventId: event1) {
+        fired1 = true
+      }
+      trigger.firstRunCheck(byEventId: event2) {
+        fired2 = true
+      }
+      
+      XCTAssertTrue(fired1)
+      fired1 = false
+      XCTAssertTrue(fired2)
+      fired2 = false
+      
+      /// Test clear all
+      trigger.clearAll()
+      trigger.firstRunCheck(byEventId: event1) {
+        fired1 = true
+      }
+      trigger.firstRunCheck(byEventId: event2) {
+        fired2 = true
+      }
+      
+      XCTAssertTrue(fired1)
+      fired1 = false
+      XCTAssertTrue(fired2)
+      fired2 = false
+
+      /// Test clear by [event id]
+      trigger.clear(byEventIdList: [event1, event2])
+      trigger.firstRunCheck(byEventId: event1) {
+        fired1 = true
+      }
+      trigger.firstRunCheck(byEventId: event2) {
+        fired2 = true
+      }
+
+      XCTAssertTrue(fired1)
+      fired1 = false
+      XCTAssertTrue(fired2)
+      fired2 = false
+
+      /// Test clear by variable args
+      trigger.clear(byEventIdList: event1, event2)
+      trigger.firstRunCheck(byEventId: event1) {
+        fired1 = true
+      }
+      trigger.firstRunCheck(byEventId: event2) {
+        fired2 = true
+      }
+
+      XCTAssertTrue(fired1)
+      fired1 = false
+      XCTAssertTrue(fired2)
+      fired2 = false
+
+      /// Test clear by event id
+      trigger.clear(byEventId: event1)
+      trigger.clear(byEventId: event2)
+      trigger.firstRunCheck(byEventId: event1) {
+        fired1 = true
+      }
+      trigger.firstRunCheck(byEventId: event2) {
+        fired2 = true
+      }
+
+      XCTAssertTrue(fired1)
+      fired1 = false
+      XCTAssertTrue(fired2)
+      fired2 = false
+    }
   }
   
   func testExample() {
