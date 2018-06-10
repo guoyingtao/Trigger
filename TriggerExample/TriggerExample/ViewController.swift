@@ -27,8 +27,8 @@ class ViewController: UITableViewController {
   var even3RunTimes = 0
   var even4RunTimes = 0
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
     
     SwiftTrigger()?.firstRunCheck(byEventId: "Tip") {
       let alertController = UIAlertController(title: "Tip", message: "Click [Clear All] Button to restart a new round test.", preferredStyle: .alert)

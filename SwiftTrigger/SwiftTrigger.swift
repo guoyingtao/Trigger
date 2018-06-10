@@ -21,16 +21,25 @@ public class SwiftTrigger {
    */
   class MyPersistentContainer: NSPersistentContainer {
     override open class func defaultDirectoryURL() -> URL {
-      let urls = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)
-      let url = urls[urls.count - 1].appendingPathComponent("SwiftTriggerDB")
+      let urlForApplicationSupportDirectory = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+      
+      let url = urlForApplicationSupportDirectory.appendingPathComponent(TriggerConfig.dbFolder)
+      
+      if !FileManager.default.fileExists(atPath: url.path) {
+        do {
+          try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+        } catch {
+          print("Can not create storage folder.")
+        }
+      }
+
       return url
     }
   }
 
   private let databaseName = "SwiftTriggerModel"
   private lazy var persistentContainer: NSPersistentContainer? = {
-    let bundleURL = Bundle(for: SwiftTrigger.self)
-    let modelURL = bundleURL.url(forResource: databaseName, withExtension: "momd")
+    let modelURL = Bundle(for: SwiftTrigger.self).url(forResource: databaseName, withExtension: "momd")
 
     var container: MyPersistentContainer
     

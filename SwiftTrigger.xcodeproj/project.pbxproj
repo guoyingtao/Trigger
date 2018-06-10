@@ -10,6 +10,7 @@
 		5F1B391B20A4A97B0052ECE1 /* TriggerProtocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1B391A20A4A97B0052ECE1 /* TriggerProtocal.swift */; };
 		5F1B392C20A4C7F90052ECE1 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5F1B392B20A4C7F90052ECE1 /* README.md */; };
 		5F1B392E20A4C9090052ECE1 /* SwiftTrigger.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 5F1B392D20A4C9090052ECE1 /* SwiftTrigger.podspec */; };
+		5F4A877E20CCBD6700F22715 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4A877D20CCBD6700F22715 /* Config.swift */; };
 		5F6082081FFD87620043F259 /* SwiftTrigger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F6081FE1FFD87620043F259 /* SwiftTrigger.framework */; };
 		5F60820D1FFD87620043F259 /* SwiftTriggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F60820C1FFD87620043F259 /* SwiftTriggerTests.swift */; };
 		5F60820F1FFD87620043F259 /* SwiftTrigger.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F6082011FFD87620043F259 /* SwiftTrigger.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -31,6 +32,7 @@
 		5F1B391A20A4A97B0052ECE1 /* TriggerProtocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerProtocal.swift; sourceTree = "<group>"; };
 		5F1B392B20A4C7F90052ECE1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		5F1B392D20A4C9090052ECE1 /* SwiftTrigger.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SwiftTrigger.podspec; sourceTree = SOURCE_ROOT; };
+		5F4A877D20CCBD6700F22715 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		5F6081FE1FFD87620043F259 /* SwiftTrigger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftTrigger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F6082011FFD87620043F259 /* SwiftTrigger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftTrigger.h; sourceTree = "<group>"; };
 		5F6082021FFD87620043F259 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 				5F6082181FFD88830043F259 /* SwiftTriggerModel.xcdatamodeld */,
 				5F1B391A20A4A97B0052ECE1 /* TriggerProtocal.swift */,
 				5F60821B1FFD89650043F259 /* SwiftTrigger.swift */,
+				5F4A877D20CCBD6700F22715 /* Config.swift */,
 			);
 			path = SwiftTrigger;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F60821C1FFD89650043F259 /* SwiftTrigger.swift in Sources */,
+				5F4A877E20CCBD6700F22715 /* Config.swift in Sources */,
 				5F60821A1FFD88830043F259 /* SwiftTriggerModel.xcdatamodeld in Sources */,
 				5F1B391B20A4A97B0052ECE1 /* TriggerProtocal.swift in Sources */,
 			);

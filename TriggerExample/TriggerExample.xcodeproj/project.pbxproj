@@ -10,6 +10,7 @@
 		5F1B392820A4C7950052ECE1 /* TriggerProtocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1B392420A4C7950052ECE1 /* TriggerProtocal.swift */; };
 		5F1B392920A4C7950052ECE1 /* SwiftTriggerModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5F1B392520A4C7950052ECE1 /* SwiftTriggerModel.xcdatamodeld */; };
 		5F1B392A20A4C7950052ECE1 /* SwiftTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1B392720A4C7950052ECE1 /* SwiftTrigger.swift */; };
+		5F4A878020CCC21100F22715 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4A877F20CCC21100F22715 /* Config.swift */; };
 		5F60822A1FFDB3600043F259 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6082291FFDB3600043F259 /* AppDelegate.swift */; };
 		5F60822C1FFDB3610043F259 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F60822B1FFDB3610043F259 /* ViewController.swift */; };
 		5F60822F1FFDB3610043F259 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F60822D1FFDB3610043F259 /* Main.storyboard */; };
@@ -32,6 +33,7 @@
 		5F1B392420A4C7950052ECE1 /* TriggerProtocal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TriggerProtocal.swift; path = ../../SwiftTrigger/TriggerProtocal.swift; sourceTree = "<group>"; };
 		5F1B392620A4C7950052ECE1 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		5F1B392720A4C7950052ECE1 /* SwiftTrigger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftTrigger.swift; path = ../../SwiftTrigger/SwiftTrigger.swift; sourceTree = "<group>"; };
+		5F4A877F20CCC21100F22715 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Config.swift; path = ../../SwiftTrigger/Config.swift; sourceTree = "<group>"; };
 		5F6082261FFDB3600043F259 /* TriggerExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TriggerExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F6082291FFDB3600043F259 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F60822B1FFDB3610043F259 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 		5F1B392320A4C6CF0052ECE1 /* SwiftTrigger */ = {
 			isa = PBXGroup;
 			children = (
+				5F4A877F20CCC21100F22715 /* Config.swift */,
 				5F1B392720A4C7950052ECE1 /* SwiftTrigger.swift */,
 				5F1B392520A4C7950052ECE1 /* SwiftTriggerModel.xcdatamodeld */,
 				5F1B392420A4C7950052ECE1 /* TriggerProtocal.swift */,
@@ -229,6 +232,7 @@
 				5F60822C1FFDB3610043F259 /* ViewController.swift in Sources */,
 				5F60822A1FFDB3600043F259 /* AppDelegate.swift in Sources */,
 				5F1B392820A4C7950052ECE1 /* TriggerProtocal.swift in Sources */,
+				5F4A878020CCC21100F22715 /* Config.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

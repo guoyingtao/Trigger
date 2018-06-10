@@ -20,7 +20,7 @@ SwiftTrigger is used to easily check if some events should be trigged by executi
 To integrate SwiftTrigger into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
-pod 'SwiftTrigger', '~> 0.1.13'
+pod 'SwiftTrigger', '~> 0.1.14'
 ```
 
 ### Cathage
