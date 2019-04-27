@@ -73,9 +73,12 @@ public class SwiftTrigger {
 // MARK: Public APIs
 extension SwiftTrigger {
   /**
-   - If a event is ran for the first time, then execute an action
+   If a event is ran for the first time, then execute an action
+   - parameter id: Event Id
+   - parameter action: action to be excuted after trigger is pulled
+   - returns Void
    */
-  public func firstRunCheck(byEventId id: String, action:@escaping ()->Void) {
+  public func firstRunCheck(byEventId id: String, action: @escaping ()->Void) {
     check(byEventId:id, targetCount:1, repeat: 1, action: action)
   }
   

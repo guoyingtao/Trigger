@@ -8,6 +8,9 @@ SwiftTrigger is used to easily check if some events should be trigged by executi
 - every N times run
 - every N times run but stops after repeating M times
 
+## Events Storage
+SwiftTrigger uses coredata to storage events. All the storage files are in its own subfolder whose default name is "SwiftTriggerDB". You can always change it by setting TriggerConfig.dbFolder to the name whatever you want.
+
 ## Requirements
 
 * iOS 10.0+
