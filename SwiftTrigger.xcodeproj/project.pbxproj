@@ -85,9 +85,9 @@
 			children = (
 				5F1B392D20A4C9090052ECE1 /* SwiftTrigger.podspec */,
 				5F1B392B20A4C7F90052ECE1 /* README.md */,
-				5F6082011FFD87620043F259 /* SwiftTrigger.h */,
 				5F6082021FFD87620043F259 /* Info.plist */,
 				5F6082181FFD88830043F259 /* SwiftTriggerModel.xcdatamodeld */,
+				5F6082011FFD87620043F259 /* SwiftTrigger.h */,
 				5F60821B1FFD89650043F259 /* SwiftTrigger.swift */,
 				5F4A877D20CCBD6700F22715 /* Config.swift */,
 				5FECDE102274A90500E1B86C /* Todo */,

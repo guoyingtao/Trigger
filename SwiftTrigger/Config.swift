@@ -8,6 +8,10 @@
 
 import Foundation
 
-public struct TriggerConfig {
+/**
+ Setting config of SwiftTrigger
+ */
+public enum TriggerConfig {
+  /// The folder for database files
   static var dbFolder = "SwiftTriggerDB"
 }

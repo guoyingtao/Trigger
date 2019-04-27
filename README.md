@@ -50,14 +50,14 @@ SwiftTrigger().check(byEventId: "Event2", targetCount: N) { {
 
 ### create an event trigged every N times
 ```swift
-SwiftTrigger().check(byEventId: "Event3", targetCount: N, repeatTime: 0) {
+SwiftTrigger().check(byEventId: "Event3", targetCount: N, repeat: 0) {
   // do something
 }
 ```
 
 ### create an event trigged every N times but stop after repeating M times
 ```swift
-SwiftTrigger().check(byEventId: "Event4", targetCount: N, repeatTime: M) {
+SwiftTrigger().check(byEventId: "Event4", targetCount: N, repeat: M) {
   // do something
 }
 ```

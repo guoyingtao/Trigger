@@ -86,7 +86,7 @@ class TriggerTests: XCTestCase {
       
       for _ in 1...10 { // Repeat cycle
         for i in 1...target {
-          trigger.check(byEventId: event, targetCount: target, repeatTime: repeatTime) {
+          trigger.check(byEventId: event, targetCount: target, repeat: repeatTime) {
             fired = true
           }
           
@@ -111,7 +111,7 @@ class TriggerTests: XCTestCase {
       
       for cycle in 1...10 {
         for i in 1...target {
-          trigger.check(byEventId: event, targetCount: target, repeatTime: repeatTime) {
+          trigger.check(byEventId: event, targetCount: target, repeat: repeatTime) {
             fired = true
           }
           
