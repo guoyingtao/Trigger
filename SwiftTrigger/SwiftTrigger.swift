@@ -70,18 +70,34 @@ public class SwiftTrigger {
   }
 }
 
-// MARK - TriggerProtocal
-extension SwiftTrigger: TriggerProtocal {
+// MARK: Public APIs
+extension SwiftTrigger {
+  /**
+   - If a event is ran for the first time, then execute an action
+   */
   public func firstRunCheck(byEventId id: String, action:@escaping ()->Void) {
-    check(byEventId:id, targetCount:1, action: action)
+    check(byEventId:id, targetCount:1, repeat: 1, action: action)
   }
   
+  @available(*, deprecated, renamed: "check(byEventId:targetCount:repeat:action:)")
   public func check(byEventId id: String, targetCount: UInt, repeatTime: UInt = 1, action:@escaping ()->Void) {
-    if isPullTrigger(id, targetCount: targetCount, repeatTime: repeatTime) {
+    check(byEventId: id, targetCount: targetCount, repeat: repeatTime, action: action)
+  }
+  
+  /**
+   ## Normal check function.
+   ### repeatTime
+   - After execute time meets targetCount,
+   the check can start over again for specified times
+   If repeatTime equals 0, then this cycle can be forever.
+   */
+  public func check(byEventId id: String, targetCount: UInt, repeat repeatTime: UInt = 1, action:@escaping ()->Void) {
+    if isPullTrigger(id, targetCount: targetCount, repeat: repeatTime) {
       action()
     }
   }
 
+  // clear functions can make checking event to start over
   public func clear(byEventIdList list: String...) {
     clear(byEventIdList: list)
   }
@@ -100,14 +116,19 @@ extension SwiftTrigger: TriggerProtocal {
     execute(request)
   }
   
-  public func clearAll() {
+  public func clearAllEvents() {
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Entity.CounterTask.rawValue)
     let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
     execute(request)
   }
+  
+  @available(*, deprecated, renamed: "clearAllEvents")
+  public func clearAll() {
+    clearAllEvents()
+  }
 }
 
-// MARK - internal methods for inside test
+// MARK: internal methods for inside test
 extension SwiftTrigger {
   internal func reset(byEventId id: String, targetCount: UInt, repeatTime: UInt) -> CounterTask? {
     if let tasks = getTasks(id: id) {
@@ -145,15 +166,15 @@ extension SwiftTrigger {
   }
 }
 
-// MARK - private methods for pull trigger
+// MARK: private methods for pull trigger
 extension SwiftTrigger {
-  private func isPullTrigger(_ id: String, targetCount: UInt = 1, repeatTime: UInt = 1) -> Bool {
+  private func isPullTrigger(_ id: String, targetCount: UInt = 1, repeat repeatTime: UInt = 1) -> Bool {
     if let tasks = getTasks(id: id) {
       if tasks.count > 0 {
         return checkIsPullTrigger(byTask: tasks[0])
       } else {
         addNewTask(id: id, targetCount: targetCount, repeatTime: repeatTime)
-        /// When users want to trigger something when the event with specified id first run, pull trigger.
+        // When users want to trigger something when the event with specified id first run, pull trigger.
         return targetCount == 1
       }
     } else {
@@ -166,13 +187,13 @@ extension SwiftTrigger {
       return false
     }
     
-    /** Every time when deciding if pulling trigger, we have actually
+    /* Every time when deciding if pulling trigger, we have actually
      executed the task. So we plus 1 to task.currentCount */
     task.currentCount += 1
     var pullTrigger = false
     
     if(task.currentCount == task.targetCount) {
-      if task.repeatTime == 0 { /// valid forever
+      if task.repeatTime == 0 { // valid forever
         task.valid = true
         task.currentCount = 0
         pullTrigger = true
@@ -182,7 +203,7 @@ extension SwiftTrigger {
         if (task.currentRepeatTime >= task.repeatTime) {
           task.valid = false
         } else {
-          /// reset to begin next round counting
+          // reset to begin next round counting
           task.currentCount = 0
         }
         
@@ -197,7 +218,7 @@ extension SwiftTrigger {
 }
 
 
-// MARK - private methods
+// MARK: private methods
 extension SwiftTrigger {  
   fileprivate func getTasks(id: String) -> [CounterTask]? {
     guard let managedObjectContext = managedObjectContext else {

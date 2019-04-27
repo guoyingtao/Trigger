@@ -15,7 +15,7 @@ class TriggerTests: XCTestCase {
   override func setUp() {
     trigger = SwiftTrigger()
     if let trigger = trigger {
-      trigger.clearAll()
+      trigger.clearAllEvents()
     }
     super.setUp()
     // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -23,7 +23,7 @@ class TriggerTests: XCTestCase {
   
   override func tearDown() {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
-    trigger?.clearAll()
+    trigger?.clearAllEvents()
     trigger = nil
     super.tearDown()
   }
@@ -149,7 +149,7 @@ class TriggerTests: XCTestCase {
       fired2 = false
       
       /// Test clear all
-      trigger.clearAll()
+      trigger.clearAllEvents()
       trigger.firstRunCheck(byEventId: event1) {
         fired1 = true
       }

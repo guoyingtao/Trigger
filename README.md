@@ -64,7 +64,7 @@ SwiftTrigger().check(byEventId: "Event4", targetCount: N, repeatTime: M) {
 SwiftTrigger().clear(byEventId: "Event1")
 SwiftTrigger().clear(byEventIdList: "Event1", "Event2")
 SwiftTrigger().clear(byEventIdList: ["Event1", "Event2"])
-SwiftTrigger().clearAll()
+SwiftTrigger().clearAllEvents()
 ```
 
 
