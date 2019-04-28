@@ -19,7 +19,7 @@ public class SwiftTrigger {
     override open class func defaultDirectoryURL() -> URL {
       let urlForApplicationSupportDirectory = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
       
-      let url = urlForApplicationSupportDirectory.appendingPathComponent(Config.dbFolder)
+      let url = urlForApplicationSupportDirectory.appendingPathComponent(Config.containerFolder)
       
       if FileManager.default.fileExists(atPath: url.path) == false {
         do {
@@ -93,8 +93,8 @@ extension SwiftTrigger {
    the check can start over again for specified times
    If repeatTime equals 0, then this cycle can be forever.
    */
-  public func check(byEventId id: String, targetCount: UInt, repeat repeatTime: UInt = 1, action:@escaping ()->Void) {
-    if isPullTrigger(for: Event(id: id), targetCount: targetCount, repeat: repeatTime) {
+  public func check(byEventId id: String, targetCount: UInt, repeat times: UInt = 1, action:@escaping ()->Void) {
+    if isPullTrigger(for: Event(id: id), targetCount: targetCount, repeat: times) {
       action()
     }
   }
@@ -133,12 +133,12 @@ extension SwiftTrigger {
 // MARK: private methods for pull trigger
 extension SwiftTrigger {
   
-  private func isPullTrigger(for event: Event, targetCount: UInt = 1, repeat repeatTime: UInt = 1) -> Bool {
+  private func isPullTrigger(for event: Event, targetCount: UInt = 1, repeat times: UInt = 1) -> Bool {
     if let tasks = getTasks(by: event) {
       if tasks.count > 0 {
         return checkIsPullTrigger(byTask: tasks[0])
       } else {
-        addNewTask(for: event, targetCount: targetCount, repeatTime: repeatTime)
+        addNewTask(for: event, targetCount: targetCount, repeat: times)
         // When users want to trigger something when the event with specified id first run, pull trigger.
         return targetCount == 1
       }
@@ -184,10 +184,8 @@ extension SwiftTrigger {
 
 // MARK: enums
 extension SwiftTrigger {
-  /// Setting config of SwiftTrigger
   public enum Config {
-    /// The folder for database files
-    static var dbFolder = "SwiftTriggerDB"
+    static var containerFolder = "SwiftTriggerDB"
   }
   
   /// https://www.swiftbysundell.com/posts/designing-swift-apis
@@ -218,7 +216,7 @@ extension SwiftTrigger {
     }
   }
   
-  fileprivate func addNewTask(for event: Event, targetCount: UInt, repeatTime: UInt = 1){
+  fileprivate func addNewTask(for event: Event, targetCount: UInt, repeat times: UInt = 1){
     guard let context = managedObjectContext else {
       return
     }
@@ -229,7 +227,7 @@ extension SwiftTrigger {
     task.id = event.id
     task.currentCount = 1
     task.targetCount = Int32(targetCount)
-    task.repeatTime = Int32(repeatTime)
+    task.repeatTime = Int32(times)
     task.currentRepeatTime = 0
     task.valid = (targetCount == 1) ? false : true
     
@@ -267,7 +265,7 @@ extension SwiftTrigger {
 
 // MARK: internal methods for inside test
 extension SwiftTrigger {
-  func reset(byEventId id: String, targetCount: UInt, repeatTime: UInt) -> CounterTask? {
+  func reset(byEventId id: String, targetCount: UInt, repeat times: UInt) -> CounterTask? {
     if let tasks = getTasks(by: Event(id: id)) {
       guard tasks.count > 0 else {
         return nil
@@ -277,7 +275,7 @@ extension SwiftTrigger {
       task.currentCount = 0
       task.currentRepeatTime = 0
       task.targetCount = Int32(targetCount)
-      task.repeatTime = Int32(repeatTime)
+      task.repeatTime = Int32(times)
       task.valid = true
       save()
       
@@ -287,8 +285,8 @@ extension SwiftTrigger {
     }
   }
   
-  func getCurrentRepeatTime(byEventId id: String) -> Int {
-    if let tasks = getTasks(by: Event(id: id)) {
+  func getCurrentRepeatTime(by event: Event) -> Int {
+    if let tasks = getTasks(by: event) {
       
       guard tasks.count > 0 else {
         return 0
