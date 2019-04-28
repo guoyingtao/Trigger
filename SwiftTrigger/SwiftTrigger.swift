@@ -78,11 +78,11 @@ public class SwiftTrigger {
 extension SwiftTrigger {
   /**
    If a event is ran for the first time, then execute an action
-   - parameter id: Event Id
+   - parameter event: event to be triggered
    - parameter action: action will be excuted if the trigger will be pulled
    - returns Void
    */
-  public func setOneShot(for event: Event, action: @escaping ()->Void) {
+  public func oneshotSet(for event: Event, action: @escaping ()->Void) {
     set(for: event, targetCount: 1, action: action)
   }
   
@@ -301,18 +301,11 @@ extension SwiftTrigger {
 
 // MARK: deprecated APIs
 extension SwiftTrigger {
-  @available(*, deprecated, renamed: "setOneShort(for:action:)")
+  @available(*, deprecated, renamed: "oneshotSet(for:action:)")
   public func firstRunCheck(byEventId id: String, action: @escaping ()->Void) {
-    check(byEventId:id, targetCount:1, repeat: 1, action: action)
+    oneshotSet(for: Event(id: id), action: action)
   }
   
-  @available(*, deprecated, renamed: "set(for:targetCount:repeat:)")
-  public func check(byEventId id: String, targetCount: UInt, repeat times: UInt = 1, action:@escaping ()->Void) {
-    if isFire(for: Event(id: id), targetCount: targetCount, repeat: times) {
-      action()
-    }
-  }
-
   @available(*, deprecated, renamed: "clear(events:)")
   public func clear(byEventIdList list: String...) {
     clear(byEventIdList: list)
@@ -328,9 +321,9 @@ extension SwiftTrigger {
     clear(event: Event(id: id))
   }
 
-  @available(*, deprecated, renamed: "check(byEventId:targetCount:repeat:action:)")
+  @available(*, deprecated, renamed: "set(for:targetCount:repeat:action:)")
   public func check(byEventId id: String, targetCount: UInt, repeatTime: UInt, action:@escaping ()->Void) {
-    check(byEventId: id, targetCount: targetCount, repeat: repeatTime, action: action)
+    set(for: Event(id: id), targetCount: targetCount, repeat: repeatTime, action: action)
   }
   
   @available(*, deprecated, renamed: "clearAllEvents")

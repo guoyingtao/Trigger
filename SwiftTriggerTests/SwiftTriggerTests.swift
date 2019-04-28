@@ -32,14 +32,14 @@ class TriggerTests: XCTestCase {
     if let trigger = trigger {
       var fired = false
       let event = SwiftTrigger.Event(id: "Event")
-      trigger.setOneShot(for: event) {
+      trigger.oneshotSet(for: event) {
         fired = true
       }
       
       XCTAssertTrue(fired)
       fired = false
       
-      trigger.setOneShot(for: event) {
+      trigger.oneshotSet(for: event) {
         fired = true
       }
       
@@ -136,10 +136,10 @@ class TriggerTests: XCTestCase {
       var fired2 = false
       let event1 = SwiftTrigger.Event(id: "Event1")
       let event2 = SwiftTrigger.Event(id: "Event2")
-      trigger.setOneShot(for: event1) {
+      trigger.oneshotSet(for: event1) {
         fired1 = true
       }
-      trigger.setOneShot(for: event2) {
+      trigger.oneshotSet(for: event2) {
         fired2 = true
       }
       
@@ -150,10 +150,10 @@ class TriggerTests: XCTestCase {
       
       /// Test clear all
       trigger.clearAllEvents()
-      trigger.setOneShot(for: event1) {
+      trigger.oneshotSet(for: event1) {
         fired1 = true
       }
-      trigger.setOneShot(for: event2) {
+      trigger.oneshotSet(for: event2) {
         fired2 = true
       }
       
@@ -164,10 +164,10 @@ class TriggerTests: XCTestCase {
 
       /// Test clear by [event id]
       trigger.clear(events: [event1, event2])
-      trigger.setOneShot(for: event1) {
+      trigger.oneshotSet(for: event1) {
         fired1 = true
       }
-      trigger.setOneShot(for: event2) {
+      trigger.oneshotSet(for: event2) {
         fired2 = true
       }
 
@@ -178,10 +178,10 @@ class TriggerTests: XCTestCase {
 
       /// Test clear by variable args
       trigger.clear(events: event1, event2)
-      trigger.setOneShot(for: event1) {
+      trigger.oneshotSet(for: event1) {
         fired1 = true
       }
-      trigger.setOneShot(for: event2) {
+      trigger.oneshotSet(for: event2) {
         fired2 = true
       }
 
@@ -193,10 +193,10 @@ class TriggerTests: XCTestCase {
       /// Test clear by event id
       trigger.clear(event: event1)
       trigger.clear(event: event2)
-      trigger.setOneShot(for: event1) {
+      trigger.oneshotSet(for: event1) {
         fired1 = true
       }
-      trigger.setOneShot(for: event2) {
+      trigger.oneshotSet(for: event2) {
         fired2 = true
       }
 
