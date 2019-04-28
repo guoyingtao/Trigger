@@ -82,8 +82,8 @@ extension SwiftTrigger {
    - parameter action: action will be excuted if the trigger will be pulled
    - returns Void
    */
-  public func oneshotSet(for event: Event, action: @escaping ()->Void) {
-    set(for: event, targetCount: 1, action: action)
+  public func oneshotSet(for event: Event, trigger action: @escaping ()->Void) {
+    set(for: event, targetCount: 1, trigger: action)
   }
   
   /**
@@ -92,7 +92,7 @@ extension SwiftTrigger {
    the check can start over again for specified times
    If repeat times equals 0, then this cycle can be forever.
    */
-  public func set(for event: Event, targetCount: UInt, repeat times: UInt = 1, action:@escaping ()->Void) {
+  public func set(for event: Event, targetCount: UInt, repeat times: UInt = 1, trigger action:@escaping ()->Void) {
     if isFire(for: event, targetCount: targetCount, repeat: times) {
       action()
     }
@@ -301,9 +301,9 @@ extension SwiftTrigger {
 
 // MARK: deprecated APIs
 extension SwiftTrigger {
-  @available(*, deprecated, renamed: "oneshotSet(for:action:)")
+  @available(*, deprecated, renamed: "oneshotSet(for:trigger:)")
   public func firstRunCheck(byEventId id: String, action: @escaping ()->Void) {
-    oneshotSet(for: Event(id: id), action: action)
+    oneshotSet(for: Event(id: id), trigger: action)
   }
   
   @available(*, deprecated, renamed: "clear(events:)")
@@ -321,9 +321,9 @@ extension SwiftTrigger {
     clear(event: Event(id: id))
   }
 
-  @available(*, deprecated, renamed: "set(for:targetCount:repeat:action:)")
+  @available(*, deprecated, renamed: "set(for:targetCount:repeat:trigger:)")
   public func check(byEventId id: String, targetCount: UInt, repeatTime: UInt, action:@escaping ()->Void) {
-    set(for: Event(id: id), targetCount: targetCount, repeat: repeatTime, action: action)
+    set(for: Event(id: id), targetCount: targetCount, repeat: repeatTime, trigger: action)
   }
   
   @available(*, deprecated, renamed: "clearAllEvents")
