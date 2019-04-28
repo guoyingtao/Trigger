@@ -49,14 +49,18 @@ public class SwiftTrigger {
     container = TriggerPersistentContainer(name: databaseName, managedObjectModel: model)
     container.loadPersistentStores(completionHandler: { (storeDescription, error) in
       if let error = error as NSError? {
-        print("Unresolved error \(error), \(error.userInfo)")
+        print("Unexpected error: \(error), \(error.userInfo)")
       } else if let error = error {
-        print("Unresolved error \(error)")
+        print("Unexpected error: \(error)")
       }
     })
     
     return container
   }()
+  
+  private lazy var taskEntityName: String = {
+    return String(describing: CounterTask.self)
+  } ()
   
   private var managedObjectContext: NSManagedObjectContext?
   
@@ -101,21 +105,21 @@ extension SwiftTrigger {
   }
   
   public func clear(byEventIdList list: [String]) {
-    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Entity.counterTask.rawValue)
+    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: taskEntityName)
     fetchRequest.predicate = NSPredicate(format: "id IN %@", list)
     let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
     execute(request)
   }
   
   public func clear(byEventId id: String) {
-    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Entity.counterTask.rawValue)
+    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: taskEntityName)
     fetchRequest.predicate = NSPredicate(format: "id == %@", id)
     let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
     execute(request)
   }
   
   public func clearAllEvents() {
-    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Entity.counterTask.rawValue)
+    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: taskEntityName)
     let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
     execute(request)
   }
@@ -186,10 +190,6 @@ extension SwiftTrigger {
     static var dbFolder = "SwiftTriggerDB"
   }
   
-  enum Entity: String {
-    case counterTask = "CounterTask"
-  }
-  
   /// https://www.swiftbysundell.com/posts/designing-swift-apis
   public struct Event {
     let id: String
@@ -197,39 +197,35 @@ extension SwiftTrigger {
 }
 
 // MARK: private methods
-extension SwiftTrigger {  
+extension SwiftTrigger {
   fileprivate func getTasks(by event: Event) -> [CounterTask]? {
-    guard let managedObjectContext = managedObjectContext else {
+    guard let context = managedObjectContext else {
       return nil
     }
     
-    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Entity.CounterTask.rawValue)
+    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: taskEntityName)
     fetchRequest.predicate = NSPredicate(format: "id == %@", event.id)
     
     do {
-      let fetchedResults = try managedObjectContext.fetch(fetchRequest) as? [NSManagedObject]
-      
-      guard fetchedResults != nil else {
+      guard let tasks = try context.fetch(fetchRequest) as? [CounterTask] else {
         return nil
       }
       
-      if let tasks = fetchedResults as? [CounterTask] {
-        return tasks
-      } else {
-        return nil
-      }
+      return tasks
     } catch {
-      print(error)
+      print("Unexpected error: \(error)")
       return nil
     }
   }
   
   fileprivate func addNewTask(for event: Event, targetCount: UInt, repeatTime: UInt = 1){
-    guard let managedObjectContext = managedObjectContext else {
+    guard let context = managedObjectContext else {
       return
     }
     
-    let task = NSEntityDescription.insertNewObject(forEntityName: Entity.CounterTask.rawValue, into: managedObjectContext) as! CounterTask
+    guard let task = NSEntityDescription.insertNewObject(forEntityName: taskEntityName, into: context) as? CounterTask else {
+      return
+    }
     task.id = event.id
     task.currentCount = 1
     task.targetCount = Int32(targetCount)
@@ -271,9 +267,8 @@ extension SwiftTrigger {
 
 // MARK: internal methods for inside test
 extension SwiftTrigger {
-  internal func reset(byEventId id: String, targetCount: UInt, repeatTime: UInt) -> CounterTask? {
+  func reset(byEventId id: String, targetCount: UInt, repeatTime: UInt) -> CounterTask? {
     if let tasks = getTasks(by: Event(id: id)) {
-      
       guard tasks.count > 0 else {
         return nil
       }
@@ -292,7 +287,7 @@ extension SwiftTrigger {
     }
   }
   
-  internal func getCurrentRepeatTime(byEventId id: String) -> Int {
+  func getCurrentRepeatTime(byEventId id: String) -> Int {
     if let tasks = getTasks(by: Event(id: id)) {
       
       guard tasks.count > 0 else {
@@ -305,6 +300,11 @@ extension SwiftTrigger {
     
     return 0
   }
+  
+  func test() {
+    CounterTask.description()
+  }
+  
 }
 
 // MARK: deprecated APIs
