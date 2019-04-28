@@ -80,9 +80,9 @@ extension SwiftTrigger {
    If a event is ran for the first time, then execute an action
    - parameter event: event to be triggered
    - parameter action: action will be excuted if the trigger will be pulled
-   - returns Void
    */
-  public func oneshotCheck(for event: Event, trigger action: @escaping ()->Void) {
+  public func oneshotCheck(for event: Event,
+                           trigger action: @escaping ()->Void) {
     check(for: event, targetCount: 1, trigger: action)
   }
   
@@ -91,6 +91,10 @@ extension SwiftTrigger {
    After execute time meets targetCount,
    the check can start over again for specified times
    If repeat times equals 0, then this cycle can be forever.
+   - parameter event: event to be triggered
+   - parameter targetCount: trigger target count
+   - parameter times: repeat times
+   - parameter action: action will be excuted if the trigger will be pulled
    */
   public func check(for event: Event,
                     targetCount: UInt,
@@ -101,7 +105,7 @@ extension SwiftTrigger {
     }
   }
   
-  // clear functions can make checking event to start over
+  // MARK: functions below are "clear functions" which can start over triggers
   public func clear(forEvent event: Event) {
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: taskEntityName)
     fetchRequest.predicate = NSPredicate(format: "id == %@", event.id)
