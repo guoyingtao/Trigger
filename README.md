@@ -1,4 +1,6 @@
-![SwiftTrigger](https://github.com/guoyingtao/repo/blob/master/images/Trigger.png)
+<p align="center">
+  <img src="logo.png" height="100" max-width="90%" alt="Swift Trigger" />
+</p>
 
 # SwiftTrigger
 
