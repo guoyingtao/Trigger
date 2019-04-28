@@ -9,7 +9,7 @@ SwiftTrigger is used to easily check if some events should be trigged by executi
 - every N times run but stops after repeating M times
 
 ## Events Storage
-SwiftTrigger uses coredata to storage events. All the storage files are in its own subfolder whose default name is "SwiftTriggerDB". You can always change it by setting TriggerConfig.dbFolder to the name whatever you want.
+SwiftTrigger uses coredata to storage events. All the storage files are in its own subfolder whose default name is "SwiftTriggerDB". You can always change it by setting SwiftTrigger.Config.containerFolder to the name whatever you want.
 
 ## Requirements
 
@@ -23,7 +23,7 @@ SwiftTrigger uses coredata to storage events. All the storage files are in its o
 To integrate SwiftTrigger into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
-pod 'SwiftTrigger', '~> 0.1.14'
+pod 'SwiftTrigger', '~> 1.0.0'
 ```
 
 ### Cathage
@@ -36,38 +36,44 @@ github "guoyingtao/Trigger"
 
 ### check if an event runs first time
 ```swift
-SwiftTrigger().firstRunCheck(byEventId: "Event1") {
+let event = SwiftTrigger.Event(id: "MyEvent")
+SwiftTrigger().oneshotSet(for: event) {
   // do something
 }
 ```
 
 ### check if an event runs for the N time
 ```swift
-SwiftTrigger().check(byEventId: "Event2", targetCount: N) { {
+let event = SwiftTrigger.Event(id: "MyEvent")
+SwiftTrigger().set(for: event, targetCount: N) { {
   // do something
 }
 ```
 
 ### create an event trigged every N times
 ```swift
-SwiftTrigger().check(byEventId: "Event3", targetCount: N, repeat: 0) {
+let event = SwiftTrigger.Event(id: "MyEvent")
+SwiftTrigger().set(for: event, targetCount: N, repeat: 0) {
   // do something
 }
 ```
 
 ### create an event trigged every N times but stop after repeating M times
 ```swift
-SwiftTrigger().check(byEventId: "Event4", targetCount: N, repeat: M) {
+let event = SwiftTrigger.Event(id: "MyEvent")
+SwiftTrigger().set(for: event, targetCount: N, repeat: M) {
   // do something
 }
 ```
 
 ### clear events
 ```swift
-SwiftTrigger().clear(byEventId: "Event1")
-SwiftTrigger().clear(byEventIdList: "Event1", "Event2")
-SwiftTrigger().clear(byEventIdList: ["Event1", "Event2"])
-SwiftTrigger().clearAllEvents()
+let event1 = SwiftTrigger.Event(id: "MyEvent1")
+let event2 = SwiftTrigger.Event(id: "MyEvent2")
+SwiftTrigger().clear(forEvent: event1)
+SwiftTrigger().clear(forEvents: event1, event2)
+SwiftTrigger().clear(forEvents: [event1, event2])
+SwiftTrigger().clearAll()
 ```
 
 

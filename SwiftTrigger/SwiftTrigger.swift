@@ -99,14 +99,14 @@ extension SwiftTrigger {
   }
   
   // clear functions can make checking event to start over
-  public func clear(event: Event) {
+  public func clear(forEvent event: Event) {
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: taskEntityName)
     fetchRequest.predicate = NSPredicate(format: "id == %@", event.id)
     let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
     execute(request)
   }
 
-  public func clear(events: [Event]) {
+  public func clear(forEvents events: [Event]) {
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: taskEntityName)
     let ids = events.map{ $0.id }
     fetchRequest.predicate = NSPredicate(format: "id IN %@", ids)
@@ -114,11 +114,11 @@ extension SwiftTrigger {
     execute(request)
   }
 
-  public func clear(events: Event...) {
-    clear(events: events)
+  public func clear(forEvents events: Event...) {
+    clear(forEvents: events)
   }
   
-  public func clearAllEvents() {
+  public func clearAll() {
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: taskEntityName)
     let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
     execute(request)
@@ -313,22 +313,17 @@ extension SwiftTrigger {
   
   @available(*, deprecated, renamed: "clear(events:)")
   public func clear(byEventIdList list: [String]) {
-    clear(events: list.map{ Event(id: $0)})
+    clear(forEvents: list.map{ Event(id: $0)})
   }
   
   @available(*, deprecated, renamed: "clear(event:)")
   public func clear(byEventId id: String) {
-    clear(event: Event(id: id))
+    clear(forEvents: Event(id: id))
   }
 
   @available(*, deprecated, renamed: "set(for:targetCount:repeat:trigger:)")
   public func check(byEventId id: String, targetCount: UInt, repeatTime: UInt, action:@escaping ()->Void) {
     set(for: Event(id: id), targetCount: targetCount, repeat: repeatTime, trigger: action)
-  }
-  
-  @available(*, deprecated, renamed: "clearAllEvents")
-  public func clearAll() {
-    clearAllEvents()
   }
 }
 
