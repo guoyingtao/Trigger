@@ -11,7 +11,7 @@ SwiftTrigger is used to easily check if some events should be trigged by executi
 - every N times run but stops after repeating M times
 
 ## Events Storage
-SwiftTrigger uses coredata to storage events. All the storage files are in its own subfolder whose default name is "SwiftTriggerDB". You can always change it by setting SwiftTrigger.Config.containerFolder to the name whatever you want.
+Behind the scene, SwiftTrigger uses coredata to save events. All the coredata files are in its own folder whose default name is "SwiftTriggerDB". You can always change it by setting SwiftTrigger.Config.containerFolder to your favorite name.
 
 ## Requirements
 
@@ -36,7 +36,7 @@ github "guoyingtao/Trigger"
 
 ## usage
 
-### check if an event runs first time
+### create an event triggered only for the first time
 ```swift
 let event = SwiftTrigger.Event(id: "MyEvent")
 SwiftTrigger().oneshotCheck(for: event) {
@@ -44,7 +44,7 @@ SwiftTrigger().oneshotCheck(for: event) {
 }
 ```
 
-### check if an event runs for the N time
+### create an event triggered for the Nth time
 ```swift
 let event = SwiftTrigger.Event(id: "MyEvent")
 SwiftTrigger().check(for: event, targetCount: N) { {
@@ -52,7 +52,7 @@ SwiftTrigger().check(for: event, targetCount: N) { {
 }
 ```
 
-### create an event trigged every N times
+### create an event triggered every N times
 ```swift
 let event = SwiftTrigger.Event(id: "MyEvent")
 SwiftTrigger().check(for: event, targetCount: N, repeat: 0) {
@@ -60,7 +60,7 @@ SwiftTrigger().check(for: event, targetCount: N, repeat: 0) {
 }
 ```
 
-### create an event trigged every N times but stop after repeating M times
+### create an event triggered every N times but stop triggering after the event repeated for M times
 ```swift
 let event = SwiftTrigger.Event(id: "MyEvent")
 SwiftTrigger().check(for: event, targetCount: N, repeat: M) {
@@ -68,7 +68,7 @@ SwiftTrigger().check(for: event, targetCount: N, repeat: M) {
 }
 ```
 
-### clear events
+### clear triggers for events
 ```swift
 let event1 = SwiftTrigger.Event(id: "MyEvent1")
 let event2 = SwiftTrigger.Event(id: "MyEvent2")
