@@ -82,8 +82,8 @@ extension SwiftTrigger {
    - parameter action: action will be excuted if the trigger will be pulled
    - returns Void
    */
-  public func setFirstTimeTrigger(for event: Event, action:@escaping ()->Void) {
-    setTrigger(for: event, targetCount: 1, action: action)
+  public func setOneShot(for event: Event, action: @escaping ()->Void) {
+    set(for: event, targetCount: 1, action: action)
   }
   
   /**
@@ -92,7 +92,7 @@ extension SwiftTrigger {
    the check can start over again for specified times
    If repeat times equals 0, then this cycle can be forever.
    */
-  public func setTrigger(for event: Event, targetCount: UInt, repeat times: UInt = 1, action:@escaping ()->Void) {
+  public func set(for event: Event, targetCount: UInt, repeat times: UInt = 1, action:@escaping ()->Void) {
     if isFire(for: event, targetCount: targetCount, repeat: times) {
       action()
     }
@@ -301,12 +301,12 @@ extension SwiftTrigger {
 
 // MARK: deprecated APIs
 extension SwiftTrigger {
-  @available(*, deprecated, renamed: "setFirstTimerTrigger(for:action:)")
+  @available(*, deprecated, renamed: "setOneShort(for:action:)")
   public func firstRunCheck(byEventId id: String, action: @escaping ()->Void) {
     check(byEventId:id, targetCount:1, repeat: 1, action: action)
   }
   
-  @available(*, deprecated, renamed: "setTrigger(for:targetCount:repeat:)")
+  @available(*, deprecated, renamed: "set(for:targetCount:repeat:)")
   public func check(byEventId id: String, targetCount: UInt, repeat times: UInt = 1, action:@escaping ()->Void) {
     if isFire(for: Event(id: id), targetCount: targetCount, repeat: times) {
       action()
