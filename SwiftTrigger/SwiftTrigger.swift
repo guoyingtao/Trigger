@@ -82,8 +82,8 @@ extension SwiftTrigger {
    - parameter action: action will be excuted if the trigger will be pulled
    - returns Void
    */
-  public func oneshotSet(for event: Event, trigger action: @escaping ()->Void) {
-    set(for: event, targetCount: 1, trigger: action)
+  public func oneshotCheck(for event: Event, trigger action: @escaping ()->Void) {
+    check(for: event, targetCount: 1, trigger: action)
   }
   
   /**
@@ -92,7 +92,10 @@ extension SwiftTrigger {
    the check can start over again for specified times
    If repeat times equals 0, then this cycle can be forever.
    */
-  public func set(for event: Event, targetCount: UInt, repeat times: UInt = 1, trigger action:@escaping ()->Void) {
+  public func check(for event: Event,
+                    targetCount: UInt,
+                    repeat times: UInt = 1,
+                    trigger action:@escaping ()->Void) {
     if isFire(for: event, targetCount: targetCount, repeat: times) {
       action()
     }
@@ -127,17 +130,17 @@ extension SwiftTrigger {
 
 // MARK: private methods for pull trigger
 extension SwiftTrigger {
-  private func isFire(for event: Event, targetCount: UInt = 1, repeat times: UInt = 1) -> Bool {
-    if let tasks = getTasks(by: event) {
-      if tasks.count > 0 {
-        return checkIsFire(byTask: tasks[0])
-      } else {
-        addNewTask(for: event, targetCount: targetCount, repeat: times)
-        // When users want to trigger something when the event with specified id first run, pull trigger.
-        return targetCount == 1
-      }
+  private func isFire(for event: Event,
+                      targetCount: UInt = 1,
+                      repeat times: UInt = 1) -> Bool {
+    guard let tasks = getTasks(by: event) else { return false }
+
+    if tasks.count > 0 {
+      return checkIsFire(byTask: tasks[0])
     } else {
-      return false
+      addNewTask(for: event, targetCount: targetCount, repeat: times)
+      // Fire for oneshot trigger
+      return targetCount == 1
     }
   }
 
@@ -149,13 +152,13 @@ extension SwiftTrigger {
     /* Every time when deciding if pulling trigger, we have actually
      executed the task. So we plus 1 to task.currentCount */
     task.currentCount += 1
-    var pullTrigger = false
+    var fire = false
     
     if(task.currentCount == task.targetCount) {
       if task.repeatTime == 0 { // valid forever
         task.valid = true
         task.currentCount = 0
-        pullTrigger = true
+        fire = true
       } else {
         task.currentRepeatTime += 1
         
@@ -166,13 +169,13 @@ extension SwiftTrigger {
           task.currentCount = 0
         }
         
-        pullTrigger = true
+        fire = true
       }
     }
     
     save()
     
-    return pullTrigger
+    return fire
   }
 }
 
@@ -210,7 +213,9 @@ extension SwiftTrigger {
     }
   }
   
-  fileprivate func addNewTask(for event: Event, targetCount: UInt, repeat times: UInt = 1){
+  fileprivate func addNewTask(for event: Event,
+                              targetCount: UInt,
+                              repeat times: UInt = 1){
     guard let context = managedObjectContext else {
       return
     }
@@ -252,15 +257,17 @@ extension SwiftTrigger {
       try managedObjectContext.execute(request)
     } catch {
       let error = error as NSError
-      print("Unresolved error \(error), \(error.userInfo)")
+      print("Unexpected error: \(error), \(error.userInfo)")
     }
   }
 }
 
 // MARK: internal methods for inside test
 extension SwiftTrigger {
-  func reset(byEventId id: String, targetCount: UInt, repeat times: UInt) -> CounterTask? {
-    if let tasks = getTasks(by: Event(id: id)) {
+  @discardableResult func reset(for event: Event,
+                                targetCount: UInt,
+                                repeat times: UInt) -> CounterTask? {
+    if let tasks = getTasks(by: event) {
       guard tasks.count > 0 else {
         return nil
       }
@@ -278,32 +285,13 @@ extension SwiftTrigger {
       return nil
     }
   }
-  
-  func getCurrentRepeatTime(by event: Event) -> Int {
-    if let tasks = getTasks(by: event) {
-      
-      guard tasks.count > 0 else {
-        return 0
-      }
-      
-      let task = tasks[0]
-      return Int(task.currentRepeatTime)
-    }
-    
-    return 0
-  }
-  
-  func test() {
-    CounterTask.description()
-  }
-  
 }
 
 // MARK: deprecated APIs
 extension SwiftTrigger {
-  @available(*, deprecated, renamed: "oneshotSet(for:trigger:)")
+  @available(*, deprecated, renamed: "oneshotCheck(for:trigger:)")
   public func firstRunCheck(byEventId id: String, action: @escaping ()->Void) {
-    oneshotSet(for: Event(id: id), trigger: action)
+    oneshotCheck(for: Event(id: id), trigger: action)
   }
   
   @available(*, deprecated, renamed: "clear(events:)")
@@ -321,9 +309,9 @@ extension SwiftTrigger {
     clear(forEvents: Event(id: id))
   }
 
-  @available(*, deprecated, renamed: "set(for:targetCount:repeat:trigger:)")
+  @available(*, deprecated, renamed: "check(for:targetCount:repeat:trigger:)")
   public func check(byEventId id: String, targetCount: UInt, repeatTime: UInt, action:@escaping ()->Void) {
-    set(for: Event(id: id), targetCount: targetCount, repeat: repeatTime, trigger: action)
+    check(for: Event(id: id), targetCount: targetCount, repeat: repeatTime, trigger: action)
   }
 }
 
