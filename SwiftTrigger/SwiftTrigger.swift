@@ -79,43 +79,43 @@ extension SwiftTrigger {
   /**
    If a event is ran for the first time, then execute an action
    - parameter id: Event Id
-   - parameter action: action to be excuted after trigger is pulled
+   - parameter action: action will be excuted if the trigger will be pulled
    - returns Void
    */
-  public func firstRunCheck(byEventId id: String, action: @escaping ()->Void) {
-    check(byEventId:id, targetCount:1, repeat: 1, action: action)
+  public func setFirstTimeTrigger(for event: Event, action:@escaping ()->Void) {
+    setTrigger(for: event, targetCount: 1, action: action)
   }
   
   /**
    ## Normal check function.
-   ### repeatTime
-   - After execute time meets targetCount,
+   After execute time meets targetCount,
    the check can start over again for specified times
-   If repeatTime equals 0, then this cycle can be forever.
+   If repeat times equals 0, then this cycle can be forever.
    */
-  public func check(byEventId id: String, targetCount: UInt, repeat times: UInt = 1, action:@escaping ()->Void) {
-    if isPullTrigger(for: Event(id: id), targetCount: targetCount, repeat: times) {
+  public func setTrigger(for event: Event, targetCount: UInt, repeat times: UInt = 1, action:@escaping ()->Void) {
+    if isFire(for: event, targetCount: targetCount, repeat: times) {
       action()
     }
   }
-
+  
   // clear functions can make checking event to start over
-  public func clear(byEventIdList list: String...) {
-    clear(byEventIdList: list)
-  }
-  
-  public func clear(byEventIdList list: [String]) {
+  public func clear(event: Event) {
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: taskEntityName)
-    fetchRequest.predicate = NSPredicate(format: "id IN %@", list)
+    fetchRequest.predicate = NSPredicate(format: "id == %@", event.id)
     let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
     execute(request)
   }
-  
-  public func clear(byEventId id: String) {
+
+  public func clear(events: [Event]) {
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: taskEntityName)
-    fetchRequest.predicate = NSPredicate(format: "id == %@", id)
+    let ids = events.map{ $0.id }
+    fetchRequest.predicate = NSPredicate(format: "id IN %@", ids)
     let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
     execute(request)
+  }
+
+  public func clear(events: Event...) {
+    clear(events: events)
   }
   
   public func clearAllEvents() {
@@ -123,20 +123,14 @@ extension SwiftTrigger {
     let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
     execute(request)
   }
-  
-  @available(*, deprecated, renamed: "clearAllEvents")
-  public func clearAll() {
-    clearAllEvents()
-  }
 }
 
 // MARK: private methods for pull trigger
 extension SwiftTrigger {
-  
-  private func isPullTrigger(for event: Event, targetCount: UInt = 1, repeat times: UInt = 1) -> Bool {
+  private func isFire(for event: Event, targetCount: UInt = 1, repeat times: UInt = 1) -> Bool {
     if let tasks = getTasks(by: event) {
       if tasks.count > 0 {
-        return checkIsPullTrigger(byTask: tasks[0])
+        return checkIsFire(byTask: tasks[0])
       } else {
         addNewTask(for: event, targetCount: targetCount, repeat: times)
         // When users want to trigger something when the event with specified id first run, pull trigger.
@@ -146,8 +140,8 @@ extension SwiftTrigger {
       return false
     }
   }
-  
-  private func checkIsPullTrigger(byTask task: CounterTask) -> Bool {
+
+  private func checkIsFire(byTask task: CounterTask) -> Bool {
     guard task.valid else {
       return false
     }
@@ -307,9 +301,41 @@ extension SwiftTrigger {
 
 // MARK: deprecated APIs
 extension SwiftTrigger {
+  @available(*, deprecated, renamed: "setFirstTimerTrigger(for:action:)")
+  public func firstRunCheck(byEventId id: String, action: @escaping ()->Void) {
+    check(byEventId:id, targetCount:1, repeat: 1, action: action)
+  }
+  
+  @available(*, deprecated, renamed: "setTrigger(for:targetCount:repeat:)")
+  public func check(byEventId id: String, targetCount: UInt, repeat times: UInt = 1, action:@escaping ()->Void) {
+    if isFire(for: Event(id: id), targetCount: targetCount, repeat: times) {
+      action()
+    }
+  }
+
+  @available(*, deprecated, renamed: "clear(events:)")
+  public func clear(byEventIdList list: String...) {
+    clear(byEventIdList: list)
+  }
+  
+  @available(*, deprecated, renamed: "clear(events:)")
+  public func clear(byEventIdList list: [String]) {
+    clear(events: list.map{ Event(id: $0)})
+  }
+  
+  @available(*, deprecated, renamed: "clear(event:)")
+  public func clear(byEventId id: String) {
+    clear(event: Event(id: id))
+  }
+
   @available(*, deprecated, renamed: "check(byEventId:targetCount:repeat:action:)")
   public func check(byEventId id: String, targetCount: UInt, repeatTime: UInt, action:@escaping ()->Void) {
     check(byEventId: id, targetCount: targetCount, repeat: repeatTime, action: action)
+  }
+  
+  @available(*, deprecated, renamed: "clearAllEvents")
+  public func clearAll() {
+    clearAllEvents()
   }
 }
 
