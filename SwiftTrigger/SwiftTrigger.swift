@@ -83,7 +83,7 @@ extension SwiftTrigger {
   }
   
   @available(*, deprecated, renamed: "check(byEventId:targetCount:repeat:action:)")
-  public func check(byEventId id: String, targetCount: UInt, repeatTime: UInt = 1, action:@escaping ()->Void) {
+  public func check(byEventId id: String, targetCount: UInt, repeatTime: UInt, action:@escaping ()->Void) {
     check(byEventId: id, targetCount: targetCount, repeat: repeatTime, action: action)
   }
   
