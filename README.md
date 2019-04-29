@@ -25,7 +25,7 @@ Behind the scene, SwiftTrigger uses coredata to save events. All the coredata fi
 To integrate SwiftTrigger into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
-pod 'SwiftTrigger', '~> 1.0.0'
+pod 'SwiftTrigger', '~> 1.0.1'
 ```
 
 ### Cathage
