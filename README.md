@@ -34,7 +34,7 @@ pod 'SwiftTrigger', '~> 1.0.0'
 github "guoyingtao/Trigger"
 ```
 
-## usage
+## Usage
 
 ### Create an event triggered only for the first time run
 ```swift
@@ -68,7 +68,7 @@ SwiftTrigger().monitor(event, targetCount: N, repeat: M) {
 }
 ```
 
-### clear triggers for events
+### Clear triggers for events
 ```swift
 let event1 = SwiftTrigger.Event(id: "MyEvent1")
 let event2 = SwiftTrigger.Event(id: "MyEvent2")
