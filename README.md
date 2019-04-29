@@ -7,8 +7,8 @@
 SwiftTrigger is used to easily check if some events should be trigged by executing times:
 - The first time run
 - The Nth time run
-- every N times run
-- every N times run but stops after repeating M times
+- every Nth times run
+- every Nth times run but stops after repeating M times
 
 ## Events Storage
 Behind the scene, SwiftTrigger uses coredata to save events. All the coredata files are in its own folder whose default name is "SwiftTriggerDB". You can always change it by setting SwiftTrigger.Config.containerFolder to your favorite name.
@@ -44,7 +44,7 @@ SwiftTrigger().oneshotCheck(event) {
 }
 ```
 
-### create an event triggered for the Nth time run
+### create an event triggered for the Nth time run then stop triggering after that
 ```swift
 let event = SwiftTrigger.Event(id: "MyEvent")
 SwiftTrigger().monitor(event, targetCount: N) { {
