@@ -8,10 +8,7 @@
 
 import Foundation
 
-/**
- Setting config of SwiftTrigger
- */
+@available(*, deprecated, message: "Please use SwiftTrigger.Config instead")
 public enum TriggerConfig {
-  /// The folder for database files
   static var dbFolder = "SwiftTriggerDB"
 }
