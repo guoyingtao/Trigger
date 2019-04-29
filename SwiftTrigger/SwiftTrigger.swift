@@ -192,6 +192,9 @@ extension SwiftTrigger {
   /// https://www.swiftbysundell.com/posts/designing-swift-apis
   public struct Event {
     let id: String
+    public init(id: String) {
+      self.id = id
+    }
   }
 }
 
