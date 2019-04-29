@@ -2,6 +2,13 @@
   <img src="logo.png" height="100" max-width="90%" alt="Swift Trigger" />
 </p>
 
+<p align="center">
+<img src="https://img.shields.io/badge/swift-4.2-orange.svg" alt="swift 5.0 badge" />
+<img src="https://img.shields.io/badge/platform-iOS-lightgrey.svg" alt="platform iOS badge" />
+<img src="https://img.shields.io/badge/license-MIT-black.svg" alt="license MIT badge" />   
+</p>
+
+
 # SwiftTrigger
 
 SwiftTrigger is used to easily check if some events should be trigged by executing times:
