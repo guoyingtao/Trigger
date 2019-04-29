@@ -81,9 +81,9 @@ extension SwiftTrigger {
    - parameter event: event to be triggered
    - parameter action: action will be excuted if the trigger will be pulled
    */
-  public func oneshotCheck(for event: Event,
+  public func oneshotCheck(_ event: Event,
                            trigger action: @escaping ()->Void) {
-    check(for: event, targetCount: 1, trigger: action)
+    monitor(event, targetCount: 1, trigger: action)
   }
   
   /**
@@ -96,7 +96,7 @@ extension SwiftTrigger {
    - parameter times: repeat times
    - parameter action: action will be excuted if the trigger will be pulled
    */
-  public func check(for event: Event,
+  public func monitor(_ event: Event,
                     targetCount: UInt,
                     repeat times: UInt = 1,
                     trigger action:@escaping ()->Void) {
@@ -293,9 +293,9 @@ extension SwiftTrigger {
 
 // MARK: deprecated APIs
 extension SwiftTrigger {
-  @available(*, deprecated, renamed: "oneshotCheck(for:trigger:)")
+  @available(*, deprecated, renamed: "oneshotCheck(event:trigger:)")
   public func firstRunCheck(byEventId id: String, action: @escaping ()->Void) {
-    oneshotCheck(for: Event(id: id), trigger: action)
+    oneshotCheck(Event(id: id), trigger: action)
   }
   
   @available(*, deprecated, renamed: "clear(events:)")
@@ -313,9 +313,9 @@ extension SwiftTrigger {
     clear(forEvents: Event(id: id))
   }
 
-  @available(*, deprecated, renamed: "check(for:targetCount:repeat:trigger:)")
+  @available(*, deprecated, renamed: "monitor(event:targetCount:repeat:trigger:)")
   public func check(byEventId id: String, targetCount: UInt, repeatTime: UInt, action:@escaping ()->Void) {
-    check(for: Event(id: id), targetCount: targetCount, repeat: repeatTime, trigger: action)
+    monitor(Event(id: id), targetCount: targetCount, repeat: repeatTime, trigger: action)
   }
 }
 
