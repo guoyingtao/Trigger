@@ -36,7 +36,7 @@ github "guoyingtao/Trigger"
 
 ## usage
 
-### create an event triggered only for the first time run
+### Create an event triggered only for the first time run
 ```swift
 let event = SwiftTrigger.Event(id: "MyEvent")
 SwiftTrigger().oneshotCheck(event) {
@@ -44,7 +44,7 @@ SwiftTrigger().oneshotCheck(event) {
 }
 ```
 
-### create an event triggered for the Nth time run then stop triggering after that
+### Create an event triggered for the Nth time run then stop triggering after that
 ```swift
 let event = SwiftTrigger.Event(id: "MyEvent")
 SwiftTrigger().monitor(event, targetCount: N) { {
@@ -52,7 +52,7 @@ SwiftTrigger().monitor(event, targetCount: N) { {
 }
 ```
 
-### create an event triggered for the every Nth times run
+### Create an event triggered for the every Nth times run
 ```swift
 let event = SwiftTrigger.Event(id: "MyEvent")
 SwiftTrigger().monitor(event, targetCount: N, repeat: 0) {
@@ -60,7 +60,7 @@ SwiftTrigger().monitor(event, targetCount: N, repeat: 0) {
 }
 ```
 
-### create an event triggered for the every Nth times fun but stop triggering after the event repeated for M times
+### Create an event triggered for the every Nth times fun but stop triggering after the event repeated for M times
 ```swift
 let event = SwiftTrigger.Event(id: "MyEvent")
 SwiftTrigger().monitor(event, targetCount: N, repeat: M) {
