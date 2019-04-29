@@ -1,15 +1,17 @@
-![SwiftTrigger](https://github.com/guoyingtao/repo/blob/master/images/Trigger.png)
+<p align="center">
+  <img src="logo.png" height="100" max-width="90%" alt="Swift Trigger" />
+</p>
 
 # SwiftTrigger
 
 SwiftTrigger is used to easily check if some events should be trigged by executing times:
 - The first time run
 - The Nth time run
-- every N times run
-- every N times run but stops after repeating M times
+- every Nth times run
+- every Nth times run but stops after repeating M times
 
 ## Events Storage
-SwiftTrigger uses coredata to storage events. All the storage files are in its own subfolder whose default name is "SwiftTriggerDB". You can always change it by setting SwiftTrigger.Config.containerFolder to the name whatever you want.
+Behind the scene, SwiftTrigger uses coredata to save events. All the coredata files are in its own folder whose default name is "SwiftTriggerDB". You can always change it by setting SwiftTrigger.Config.containerFolder to your favorite name.
 
 ## Requirements
 
@@ -34,39 +36,39 @@ github "guoyingtao/Trigger"
 
 ## usage
 
-### check if an event runs first time
+### create an event triggered only for the first time run
 ```swift
 let event = SwiftTrigger.Event(id: "MyEvent")
-SwiftTrigger().oneshotCheck(for: event) {
+SwiftTrigger().oneshotCheck(event) {
   // do something
 }
 ```
 
-### check if an event runs for the N time
+### create an event triggered for the Nth time run then stop triggering after that
 ```swift
 let event = SwiftTrigger.Event(id: "MyEvent")
-SwiftTrigger().check(for: event, targetCount: N) { {
+SwiftTrigger().monitor(event, targetCount: N) { {
   // do something
 }
 ```
 
-### create an event trigged every N times
+### create an event triggered for the every Nth times run
 ```swift
 let event = SwiftTrigger.Event(id: "MyEvent")
-SwiftTrigger().check(for: event, targetCount: N, repeat: 0) {
+SwiftTrigger().monitor(event, targetCount: N, repeat: 0) {
   // do something
 }
 ```
 
-### create an event trigged every N times but stop after repeating M times
+### create an event triggered for the every Nth times fun but stop triggering after the event repeated for M times
 ```swift
 let event = SwiftTrigger.Event(id: "MyEvent")
-SwiftTrigger().check(for: event, targetCount: N, repeat: M) {
+SwiftTrigger().monitor(event, targetCount: N, repeat: M) {
   // do something
 }
 ```
 
-### clear events
+### clear triggers for events
 ```swift
 let event1 = SwiftTrigger.Event(id: "MyEvent1")
 let event2 = SwiftTrigger.Event(id: "MyEvent2")

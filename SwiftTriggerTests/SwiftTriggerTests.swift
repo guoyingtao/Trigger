@@ -28,14 +28,14 @@ class TriggerTests: XCTestCase {
   func testFirstRun() {
     var fired = false
     let event = SwiftTrigger.Event(id: "Event")
-    trigger.oneshotCheck(for: event) {
+    trigger.oneshotCheck(event) {
       fired = true
     }
     
     XCTAssertTrue(fired)
     fired = false
     
-    trigger.oneshotCheck(for: event) {
+    trigger.oneshotCheck(event) {
       fired = true
     }
     
@@ -48,7 +48,7 @@ class TriggerTests: XCTestCase {
     var fired = false
     
     for i in 1...target {
-      trigger.check(for: event, targetCount: target) {
+      trigger.monitor(event, targetCount: target) {
         fired = true
       }
       
@@ -61,7 +61,7 @@ class TriggerTests: XCTestCase {
     }
     
     for _ in 1...100 {
-      trigger.check(for: event, targetCount: target) {
+      trigger.monitor(event, targetCount: target) {
         fired = true
       }
       
@@ -77,7 +77,7 @@ class TriggerTests: XCTestCase {
     
     for _ in 1...10 { // Repeat cycle
       for i in 1...target {
-        trigger.check(for: event, targetCount: target, repeat: times) {
+        trigger.monitor(event, targetCount: target, repeat: times) {
           fired = true
         }
         
@@ -100,7 +100,7 @@ class TriggerTests: XCTestCase {
     
     for cycle in 1...10 {
       for i in 1...target {
-        trigger.check(for: event, targetCount: target, repeat: times) {
+        trigger.monitor(event, targetCount: target, repeat: times) {
           fired = true
         }
         
@@ -121,14 +121,14 @@ class TriggerTests: XCTestCase {
   func testReset() {
     var fired = false
     let event = SwiftTrigger.Event(id: "Event")
-    trigger.oneshotCheck(for: event) {
+    trigger.oneshotCheck(event) {
       fired = true
     }
     
     XCTAssertTrue(fired)
     fired = false
     
-    trigger.oneshotCheck(for: event) {
+    trigger.oneshotCheck(event) {
       fired = true
     }
     
@@ -142,7 +142,7 @@ class TriggerTests: XCTestCase {
     
     for cycle in 1...10 {
       for i in 1...target {
-        trigger.check(for: event, targetCount: target, repeat: times) {
+        trigger.monitor(event, targetCount: target, repeat: times) {
           fired = true
         }
         
@@ -165,10 +165,10 @@ class TriggerTests: XCTestCase {
     var fired2 = false
     let event1 = SwiftTrigger.Event(id: "Event1")
     let event2 = SwiftTrigger.Event(id: "Event2")
-    trigger.oneshotCheck(for: event1) {
+    trigger.oneshotCheck(event1) {
       fired1 = true
     }
-    trigger.oneshotCheck(for: event2) {
+    trigger.oneshotCheck(event2) {
       fired2 = true
     }
     
@@ -179,10 +179,10 @@ class TriggerTests: XCTestCase {
     
     /// Test clear all
     trigger.clearAll()
-    trigger.oneshotCheck(for: event1) {
+    trigger.oneshotCheck(event1) {
       fired1 = true
     }
-    trigger.oneshotCheck(for: event2) {
+    trigger.oneshotCheck(event2) {
       fired2 = true
     }
     
@@ -193,10 +193,10 @@ class TriggerTests: XCTestCase {
     
     /// Test clear by [event id]
     trigger.clear(forEvents: [event1, event2])
-    trigger.oneshotCheck(for: event1) {
+    trigger.oneshotCheck(event1) {
       fired1 = true
     }
-    trigger.oneshotCheck(for: event2) {
+    trigger.oneshotCheck(event2) {
       fired2 = true
     }
     
@@ -207,10 +207,10 @@ class TriggerTests: XCTestCase {
     
     /// Test clear by variable args
     trigger.clear(forEvents: event1, event2)
-    trigger.oneshotCheck(for: event1) {
+    trigger.oneshotCheck(event1) {
       fired1 = true
     }
-    trigger.oneshotCheck(for: event2) {
+    trigger.oneshotCheck(event2) {
       fired2 = true
     }
     
@@ -222,10 +222,10 @@ class TriggerTests: XCTestCase {
     /// Test clear by event id
     trigger.clear(forEvent: event1)
     trigger.clear(forEvent: event2)
-    trigger.oneshotCheck(for: event1) {
+    trigger.oneshotCheck(event1) {
       fired1 = true
     }
-    trigger.oneshotCheck(for: event2) {
+    trigger.oneshotCheck(event2) {
       fired2 = true
     }
     
