@@ -15,6 +15,8 @@
 		5F60820F1FFD87620043F259 /* SwiftTrigger.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F6082011FFD87620043F259 /* SwiftTrigger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5F60821A1FFD88830043F259 /* SwiftTriggerModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5F6082181FFD88830043F259 /* SwiftTriggerModel.xcdatamodeld */; };
 		5F60821C1FFD89650043F259 /* SwiftTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F60821B1FFD89650043F259 /* SwiftTrigger.swift */; };
+		5FC563202295A4C60094652C /* SwiftTrigger+Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC5631F2295A4C60094652C /* SwiftTrigger+Deprecated.swift */; };
+		5FC563222295A5510094652C /* SwiftTrigger+InsideTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC563212295A5510094652C /* SwiftTrigger+InsideTypes.swift */; };
 		5FECDE112274A90500E1B86C /* Todo in Resources */ = {isa = PBXBuildFile; fileRef = 5FECDE102274A90500E1B86C /* Todo */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +42,8 @@
 		5F60820E1FFD87620043F259 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5F6082191FFD88830043F259 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		5F60821B1FFD89650043F259 /* SwiftTrigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftTrigger.swift; sourceTree = "<group>"; };
+		5FC5631F2295A4C60094652C /* SwiftTrigger+Deprecated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftTrigger+Deprecated.swift"; sourceTree = "<group>"; };
+		5FC563212295A5510094652C /* SwiftTrigger+InsideTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftTrigger+InsideTypes.swift"; sourceTree = "<group>"; };
 		5FECDE102274A90500E1B86C /* Todo */ = {isa = PBXFileReference; lastKnownFileType = text; path = Todo; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,6 +93,8 @@
 				5F6082181FFD88830043F259 /* SwiftTriggerModel.xcdatamodeld */,
 				5F6082011FFD87620043F259 /* SwiftTrigger.h */,
 				5F60821B1FFD89650043F259 /* SwiftTrigger.swift */,
+				5FC5631F2295A4C60094652C /* SwiftTrigger+Deprecated.swift */,
+				5FC563212295A5510094652C /* SwiftTrigger+InsideTypes.swift */,
 				5F4A877D20CCBD6700F22715 /* Config.swift */,
 				5FECDE102274A90500E1B86C /* Todo */,
 			);
@@ -221,8 +227,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F60821C1FFD89650043F259 /* SwiftTrigger.swift in Sources */,
+				5FC563202295A4C60094652C /* SwiftTrigger+Deprecated.swift in Sources */,
 				5F4A877E20CCBD6700F22715 /* Config.swift in Sources */,
 				5F60821A1FFD88830043F259 /* SwiftTriggerModel.xcdatamodeld in Sources */,
+				5FC563222295A5510094652C /* SwiftTrigger+InsideTypes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

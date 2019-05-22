@@ -83,48 +83,40 @@ extension SwiftTrigger {
    */
   public func oneshotCheck(_ event: Event,
                            trigger action: @escaping ()->Void) {
-    monitor(event, targetCount: 1, trigger: action)
-  }
+    let oneshotEvent = Event(id: event.id)
+    monitor(oneshotEvent, trigger: action)
+  }    
   
-  /**
-   ## Normal check function.
-   After execute time meets targetCount,
-   the check can start over again for specified times
-   If repeat times equals 0, then this cycle can be forever.
-   - parameter event: event to be triggered
-   - parameter targetCount: trigger target count
-   - parameter times: repeat times
-   - parameter action: action will be excuted if the trigger will be pulled
-   */
-  public func monitor(_ event: Event,
-                    targetCount: UInt,
-                    repeat times: UInt = 1,
-                    trigger action:@escaping ()->Void) {
-    if isFire(for: event, targetCount: targetCount, repeat: times) {
+  /// Monitoring an event and check if need to pull trigger
+  ///
+  /// - Parameters:
+  ///   - event: event to be triggered
+  ///   - action: action will be excuted after pulling trigger
+  public func monitor(_ event: Event, trigger action:@escaping ()->Void) {
+    if isFire(for: event) {
       action()
     }
   }
   
   // MARK: functions below are "clear functions" which can start over triggers
-  public func clear(forEvent event: Event) {
+  public func clearEvent(by id: EventId) {
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: taskEntityName)
-    fetchRequest.predicate = NSPredicate(format: "id == %@", event.id)
+    fetchRequest.predicate = NSPredicate(format: "id == %@", id)
     let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
     execute(request)
   }
-
-  public func clear(forEvents events: [Event]) {
+  
+  public func clearEvents(by ids: [EventId]) {
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: taskEntityName)
-    let ids = events.map{ $0.id }
     fetchRequest.predicate = NSPredicate(format: "id IN %@", ids)
     let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
     execute(request)
   }
-
-  public func clear(forEvents events: Event...) {
-    clear(forEvents: events)
-  }
   
+  public func clearEvents(by ids: EventId...) {
+    clearEvents(by: ids)
+  }
+    
   public func clearAll() {
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: taskEntityName)
     let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
@@ -132,21 +124,37 @@ extension SwiftTrigger {
   }
 }
 
-// MARK: private methods for pull trigger
+// MARK: internal methods
 extension SwiftTrigger {
-  private func isFire(for event: Event,
-                      targetCount: UInt = 1,
-                      repeat times: UInt = 1) -> Bool {
-    guard let tasks = getTasks(by: event) else { return false }
-
+  func isFire(for event: Event) -> Bool {
+    guard let tasks = getTasks(by: event.id) else { return false }
+    
     if tasks.count > 0 {
       return checkIsFire(byTask: tasks[0])
     } else {
-      addNewTask(for: event, targetCount: targetCount, repeat: times)
+      addNewTask(for: event)
       // Fire for oneshot trigger
-      return targetCount == 1
+      return event.targetRunningTimes == 1
     }
   }
+  
+  func getCurrentRepeatTime(by eventId: EventId) -> Int {
+    if let tasks = getTasks(by: eventId) {
+      
+      guard tasks.count > 0 else {
+        return 0
+      }
+      
+      let task = tasks[0]
+      return Int(task.currentRepeatTime)
+    }
+    
+    return 0
+  }
+}
+
+// MARK: private methods for pull trigger
+extension SwiftTrigger {
 
   private func checkIsFire(byTask task: CounterTask) -> Bool {
     guard task.valid else {
@@ -183,30 +191,15 @@ extension SwiftTrigger {
   }
 }
 
-// MARK: enums
-extension SwiftTrigger {
-  public enum Config {
-    static var containerFolder = "SwiftTriggerDB"
-  }
-  
-  /// https://www.swiftbysundell.com/posts/designing-swift-apis
-  public struct Event {
-    let id: String
-    public init(id: String) {
-      self.id = id
-    }
-  }
-}
-
 // MARK: private methods
 extension SwiftTrigger {
-  fileprivate func getTasks(by event: Event) -> [CounterTask]? {
+  fileprivate func getTasks(by eventId: EventId) -> [CounterTask]? {
     guard let context = managedObjectContext else {
       return nil
     }
     
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: taskEntityName)
-    fetchRequest.predicate = NSPredicate(format: "id == %@", event.id)
+    fetchRequest.predicate = NSPredicate(format: "id == %@", eventId)
     
     do {
       guard let tasks = try context.fetch(fetchRequest) as? [CounterTask] else {
@@ -220,9 +213,7 @@ extension SwiftTrigger {
     }
   }
   
-  fileprivate func addNewTask(for event: Event,
-                              targetCount: UInt,
-                              repeat times: UInt = 1){
+  fileprivate func addNewTask(for event: Event){
     guard let context = managedObjectContext else {
       return
     }
@@ -232,10 +223,10 @@ extension SwiftTrigger {
     }
     task.id = event.id
     task.currentCount = 1
-    task.targetCount = Int32(targetCount)
-    task.repeatTime = Int32(times)
+    task.targetCount = Int32(event.targetRunningTimes)
+    task.repeatTime = Int32(event.repeatTimes)
     task.currentRepeatTime = 0
-    task.valid = (targetCount == 1) ? false : true
+    task.valid = (event.targetRunningTimes == 1) ? false : true
     
     save()
   }
@@ -274,7 +265,7 @@ extension SwiftTrigger {
   @discardableResult func reset(for event: Event,
                                 targetCount: UInt,
                                 repeat times: UInt) -> CounterTask? {
-    if let tasks = getTasks(by: event) {
+    if let tasks = getTasks(by: event.id) {
       guard tasks.count > 0 else {
         return nil
       }
@@ -291,34 +282,6 @@ extension SwiftTrigger {
     } else {
       return nil
     }
-  }
-}
-
-// MARK: deprecated APIs
-extension SwiftTrigger {
-  @available(*, deprecated, renamed: "oneshotCheck(event:trigger:)")
-  public func firstRunCheck(byEventId id: String, action: @escaping ()->Void) {
-    oneshotCheck(Event(id: id), trigger: action)
-  }
-  
-  @available(*, deprecated, renamed: "clear(events:)")
-  public func clear(byEventIdList list: String...) {
-    clear(byEventIdList: list)
-  }
-  
-  @available(*, deprecated, renamed: "clear(events:)")
-  public func clear(byEventIdList list: [String]) {
-    clear(forEvents: list.map{ Event(id: $0)})
-  }
-  
-  @available(*, deprecated, renamed: "clear(event:)")
-  public func clear(byEventId id: String) {
-    clear(forEvents: Event(id: id))
-  }
-
-  @available(*, deprecated, renamed: "monitor(event:targetCount:repeat:trigger:)")
-  public func check(byEventId id: String, targetCount: UInt, repeatTime: UInt, action:@escaping ()->Void) {
-    monitor(Event(id: id), targetCount: targetCount, repeat: repeatTime, trigger: action)
   }
 }
 
