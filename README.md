@@ -6,7 +6,9 @@
 <img src="https://img.shields.io/badge/swift-5.0-orange.svg" alt="swift 5.0 badge" />
 <img src="https://img.shields.io/badge/platform-iOS-lightgrey.svg" alt="platform iOS badge" />
 <img src="https://img.shields.io/badge/license-MIT-black.svg" alt="license MIT badge" />
+<img src="https://travis-ci.com/guoyingtao/Trigger.svg?branch=master" alt="build status" />
 </p>
+
 
 # SwiftTrigger
 
