@@ -19,7 +19,7 @@ public class SwiftTrigger {
     override open class func defaultDirectoryURL() -> URL {
       let urlForApplicationSupportDirectory = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
       
-      let url = urlForApplicationSupportDirectory.appendingPathComponent(Config.containerFolder)
+      let url = urlForApplicationSupportDirectory.appendingPathComponent(SwiftTrigger.Config.containerFolder)
       
       if FileManager.default.fileExists(atPath: url.path) == false {
         do {
@@ -81,7 +81,7 @@ extension SwiftTrigger {
   /// - Parameters:
   ///   - eventId: id of the event to be triggered
   ///   - action: action will be excuted after pulling trigger
-  public func oneshotCheck(_ eventId: EventId,
+  public func oneshotCheck(_ eventId: SwiftTrigger.EventId,
                            trigger action: @escaping ()->Void) {
     let oneshotEvent = Event(id: eventId, targetRunningTimes: 1, repeatTimes: 1)
     monitor(oneshotEvent, trigger: action)
@@ -92,28 +92,28 @@ extension SwiftTrigger {
   /// - Parameters:
   ///   - event: event to be triggered
   ///   - action: action will be excuted after pulling trigger
-  public func monitor(_ event: Event, trigger action:@escaping ()->Void) {
+  public func monitor(_ event: SwiftTrigger.Event, trigger action:@escaping ()->Void) {
     if isFire(for: event) {
       action()
     }
   }
   
   // MARK: functions below are "clear functions" which can start over triggers
-  public func clearEvent(by id: EventId) {
+  public func clearEvent(by id: SwiftTrigger.EventId) {
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: taskEntityName)
     fetchRequest.predicate = NSPredicate(format: "id == %@", id)
     let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
     execute(request)
   }
   
-  public func clearEvents(by ids: [EventId]) {
+  public func clearEvents(by ids: [SwiftTrigger.EventId]) {
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: taskEntityName)
     fetchRequest.predicate = NSPredicate(format: "id IN %@", ids)
     let request = NSBatchDeleteRequest(fetchRequest: fetchRequest)
     execute(request)
   }
   
-  public func clearEvents(by ids: EventId...) {
+  public func clearEvents(by ids: SwiftTrigger.EventId...) {
     clearEvents(by: ids)
   }
     
@@ -138,7 +138,7 @@ extension SwiftTrigger {
     }
   }
   
-  func getCurrentRepeatTime(by eventId: EventId) -> Int {
+  func getCurrentRepeatTime(by eventId: SwiftTrigger.EventId) -> Int {
     if let tasks = getTasks(by: eventId) {
       
       guard tasks.count > 0 else {
@@ -193,7 +193,7 @@ extension SwiftTrigger {
 
 // MARK: private methods
 extension SwiftTrigger {
-  fileprivate func getTasks(by eventId: EventId) -> [CounterTask]? {
+  fileprivate func getTasks(by eventId: SwiftTrigger.EventId) -> [CounterTask]? {
     guard let context = managedObjectContext else {
       return nil
     }
