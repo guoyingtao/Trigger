@@ -16,7 +16,6 @@ extension SwiftTrigger {
    - parameter event: event to be triggered
    - parameter action: action will be excuted if the trigger will be pulled
    */
-  @available(*, deprecated, renamed: "onshotCheck(eventId:trigger:)")
   public func oneshotCheck(_ event: Event,
                            trigger action: @escaping ()->Void) {
     let oneshotEvent = Event(id: event.id)
