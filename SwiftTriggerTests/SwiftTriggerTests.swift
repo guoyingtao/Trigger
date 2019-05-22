@@ -120,14 +120,14 @@ class TriggerTests: XCTestCase {
   func testReset() {
     var fired = false
     let event = SwiftTrigger.Event(id: "Event")
-    trigger.oneshotCheck(event) {
+    trigger.oneshotCheck(event.id) {
       fired = true
     }
     
     XCTAssertTrue(fired)
     fired = false
     
-    trigger.oneshotCheck(event) {
+    trigger.oneshotCheck(event.id) {
       fired = true
     }
     
