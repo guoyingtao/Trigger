@@ -1,4 +1,4 @@
 language: swift
 xcode_project: SwiftTrigger.xcodeproj
 xcode_scheme: SwiftTrigger
-xcode_destination: platform=iOS Simulator,OS=12.2,name=iPad Pro (9.7-inch)
+xcode_destination: platform=iOS Simulator,OS=11.4,name=iPhone X
