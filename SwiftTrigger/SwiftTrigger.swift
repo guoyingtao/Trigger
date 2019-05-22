@@ -193,6 +193,7 @@ extension SwiftTrigger {
 
 // MARK: private methods
 extension SwiftTrigger {
+  
   fileprivate func getTasks(by eventId: SwiftTrigger.EventId) -> [CounterTask]? {
     guard let context = managedObjectContext else {
       return nil
