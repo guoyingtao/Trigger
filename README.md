@@ -45,43 +45,42 @@ github "guoyingtao/Trigger"
 
 ### Create an event triggered only for the first time run
 ```swift
-let event = SwiftTrigger.Event(id: "MyEvent")
-SwiftTrigger().oneshotCheck(event) {
+SwiftTrigger().oneshotCheck("MyEvent") {
   // do something
 }
 ```
 
 ### Create an event triggered for the Nth time run then stop triggering after that
 ```swift
-let event = SwiftTrigger.Event(id: "MyEvent")
-SwiftTrigger().monitor(event, targetCount: N) { {
+let event = SwiftTrigger.Event(id: "MyEvent", targetRunningTimes: N)
+SwiftTrigger().monitor(event) { {
   // do something
 }
 ```
 
 ### Create an event triggered for the every Nth times run
 ```swift
-let event = SwiftTrigger.Event(id: "MyEvent")
-SwiftTrigger().monitor(event, targetCount: N, repeat: 0) {
+let event = SwiftTrigger.Event(id: "MyEvent", targetRunningTimes: N, repeatTimes: 0)
+SwiftTrigger().monitor(event) {
   // do something
 }
 ```
 
 ### Create an event triggered for the every Nth times fun but stop triggering after the event repeated for M times
 ```swift
-let event = SwiftTrigger.Event(id: "MyEvent")
-SwiftTrigger().monitor(event, targetCount: N, repeat: M) {
+let event = SwiftTrigger.Event(id: "MyEvent", targetRunningTimes: N, repeatTimes: M)
+SwiftTrigger().monitor(event) {
   // do something
 }
 ```
 
 ### Clear triggers for events
 ```swift
-let event1 = SwiftTrigger.Event(id: "MyEvent1")
-let event2 = SwiftTrigger.Event(id: "MyEvent2")
-SwiftTrigger().clear(forEvent: event1)
-SwiftTrigger().clear(forEvents: event1, event2)
-SwiftTrigger().clear(forEvents: [event1, event2])
+let event1 = "MyEvent1"
+let event2 = "MyEvent2"
+SwiftTrigger().clearEvent(by: event1)
+SwiftTrigger().clearEvents(by: event1, event2)
+SwiftTrigger().clearEvents(by: [event1, event2])
 SwiftTrigger().clearAll()
 ```
 
