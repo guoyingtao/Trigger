@@ -1,4 +1,4 @@
-language: objective-c
+language: osx
 xcode_project: SwiftTrigger.xcodeproj
 xcode_scheme: SwiftTriggerTests
 xcode_destination: platform=iOS Simulator,OS=10.1,name=iPad Pro (9.7-inch)
