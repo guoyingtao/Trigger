@@ -1,4 +1,4 @@
-language: objective-c
+language: swift
 xcode_project: SwiftTrigger.xcodeproj
 xcode_scheme: SwiftTrigger
 xcode_destination: platform=iOS Simulator,OS=11.4,name=iPhone X
