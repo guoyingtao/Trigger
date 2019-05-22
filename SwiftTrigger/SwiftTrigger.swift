@@ -76,16 +76,16 @@ public class SwiftTrigger {
 
 // MARK: Public APIs
 extension SwiftTrigger {
-  /**
-   If a event is ran for the first time, then execute an action
-   - parameter event: event to be triggered
-   - parameter action: action will be excuted if the trigger will be pulled
-   */
-  public func oneshotCheck(_ event: Event,
+  /// If a event is ran for the first time, then execute an action
+  ///
+  /// - Parameters:
+  ///   - eventId: id of the event to be triggered
+  ///   - action: action will be excuted after pulling trigger
+  public func oneshotCheck(_ eventId: EventId,
                            trigger action: @escaping ()->Void) {
-    let oneshotEvent = Event(id: event.id)
+    let oneshotEvent = Event(id: eventId, targetRunningTimes: 1, repeatTimes: 1)
     monitor(oneshotEvent, trigger: action)
-  }    
+  }
   
   /// Monitoring an event and check if need to pull trigger
   ///

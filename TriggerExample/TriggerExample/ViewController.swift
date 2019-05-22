@@ -30,8 +30,7 @@ class ViewController: UITableViewController {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     
-    let event = SwiftTrigger.Event.makeOneShot(id: "Tip")
-    SwiftTrigger()?.oneshotCheck(event) {
+    SwiftTrigger()?.oneshotCheck("Tip") {
       let alertController = UIAlertController(title: "Tip", message: "Click [Clear All] Button to restart a new round test.", preferredStyle: .alert)
       let okAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction) in
         print("You've pressed OK");
@@ -47,12 +46,6 @@ class ViewController: UITableViewController {
     let trigger = SwiftTrigger()
     trigger?.clearEvents(by: "Tip", "Event1", "Event2", "Event3", "Event4")
     
-//    trigger?.clear(byId: "Tip")
-//    trigger?.clear(byId: "Event1")
-//    trigger?.clear(byId: "Event2")
-//    trigger?.clear(byId: "Event3")
-//    trigger?.clear(byId: "Event4")
-    
     event1TriggedLabel.isHidden = true
     event2TriggedLabel.isHidden = true
     event3TriggedLabel.isHidden = true
@@ -63,20 +56,20 @@ class ViewController: UITableViewController {
     even3RunTimes = 0
     even4RunTimes = 0
     
-    event1RunTimesLabel.text = String(format:"%i times", even1RunTimes)
-    event2RunTimesLabel.text = String(format:"%i times", even2RunTimes)
-    event3RunTimesLabel.text = String(format:"%i times", even3RunTimes)
-    event4RunTimesLabel.text = String(format:"%i times", even4RunTimes)
+    event1RunTimesLabel.text = "\(even1RunTimes) times"
+    event2RunTimesLabel.text = "\(even2RunTimes) times"
+    event3RunTimesLabel.text = "\(even3RunTimes) times"
+    event4RunTimesLabel.text = "\(even4RunTimes) times"
+    event4TriggedTimesLabel.text = "repeat 0 times"
   }
   
   @IBAction func runForEvent1(_ sender: Any) {
     self.event1TriggedLabel.isHidden = true
-    let event = SwiftTrigger.Event.makeOneShot(id: "Event1")
-    SwiftTrigger()?.oneshotCheck(event) {
+    SwiftTrigger()?.oneshotCheck("Event1") {
       self.event1TriggedLabel.isHidden = false
     }
     even1RunTimes += 1
-    event1RunTimesLabel.text = String(format:"%i times", even1RunTimes)
+    event1RunTimesLabel.text = "\(even1RunTimes) times"
   }
   
   @IBAction func runForEvent2(_ sender: Any) {
@@ -86,7 +79,7 @@ class ViewController: UITableViewController {
       self.event2TriggedLabel.isHidden = false
     }
     even2RunTimes += 1
-    event2RunTimesLabel.text = String(format:"%i times", even2RunTimes)
+    event2RunTimesLabel.text = "\(even2RunTimes) times"
   }
   
   @IBAction func runForEvent3(_ sender: Any) {
@@ -96,7 +89,7 @@ class ViewController: UITableViewController {
       self.event3TriggedLabel.isHidden = false
     }
     even3RunTimes += 1
-    event3RunTimesLabel.text = String(format:"%i times", even3RunTimes)
+    event3RunTimesLabel.text = "\(even3RunTimes) times"
   }
   
   @IBAction func runForEvent4(_ sender: Any) {
@@ -106,10 +99,11 @@ class ViewController: UITableViewController {
       self.event4TriggedLabel.isHidden = false
     }
     even4RunTimes += 1
-    event4RunTimesLabel.text = String(format:"%i times", even4RunTimes)
+    event4RunTimesLabel.text = "\(even4RunTimes) times"
     
-    let repeatTime = SwiftTrigger()?.getCurrentRepeatTime(by: "Event4")
-    event4TriggedTimesLabel.text = String(format:"repeat %i times", repeatTime!)
+    if let repeatTime = SwiftTrigger()?.getCurrentRepeatTime(by: "Event4") {
+      event4TriggedTimesLabel.text = "repeat \(repeatTime) times"
+    }
   }
 }
 

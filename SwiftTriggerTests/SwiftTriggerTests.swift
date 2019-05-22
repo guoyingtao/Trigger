@@ -27,15 +27,14 @@ class TriggerTests: XCTestCase {
   
   func testFirstRun() {
     var fired = false
-    let event = SwiftTrigger.Event.makeOneShot(id: "Event")
-    trigger.oneshotCheck(event) {
+    trigger.oneshotCheck("Event") {
       fired = true
     }
     
     XCTAssertTrue(fired)
     fired = false
     
-    trigger.oneshotCheck(event) {
+    trigger.oneshotCheck("Event") {
       fired = true
     }
     
@@ -164,8 +163,8 @@ class TriggerTests: XCTestCase {
   func testClear() {
     var fired1 = false
     var fired2 = false
-    let event1 = SwiftTrigger.Event.makeOneShot(id: "Event1")
-    let event2 = SwiftTrigger.Event.makeOneShot(id: "Event2")
+    let event1 = "Event1"
+    let event2 = "Event2"
     trigger.oneshotCheck(event1) {
       fired1 = true
     }
@@ -193,7 +192,7 @@ class TriggerTests: XCTestCase {
     fired2 = false
     
     /// Test clear by [event id]
-    trigger.clearEvents(by: [event1.id, event2.id])
+    trigger.clearEvents(by: [event1, event2])
     trigger.oneshotCheck(event1) {
       fired1 = true
     }
@@ -207,7 +206,7 @@ class TriggerTests: XCTestCase {
     fired2 = false
     
     /// Test clear by variable args
-    trigger.clearEvents(by: event1.id, event2.id)
+    trigger.clearEvents(by: event1, event2)
     trigger.oneshotCheck(event1) {
       fired1 = true
     }
@@ -221,8 +220,8 @@ class TriggerTests: XCTestCase {
     fired2 = false
     
     /// Test clear by event id
-    trigger.clearEvent(by: event1.id)
-    trigger.clearEvent(by: event2.id)
+    trigger.clearEvent(by: event1)
+    trigger.clearEvent(by: event2)
     trigger.oneshotCheck(event1) {
       fired1 = true
     }
